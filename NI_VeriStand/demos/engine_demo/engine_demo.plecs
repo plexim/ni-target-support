@@ -1,0 +1,1509 @@
+Plecs {
+  Name          "engine_demo"
+  Version       "4.5"
+  CircuitModel  "ContStateSpace"
+  StartTime     "0.0"
+  TimeSpan      "100"
+  Timeout       ""
+  Solver        "auto"
+  MaxStep       "1e-3"
+  InitStep      "-1"
+  FixedStep     "1e-3"
+  Refine        "5"
+  ZCStepSize    "1e-9"
+  RelTol        "1e-3"
+  AbsTol        "-1"
+  TurnOnThreshold "0"
+  SyncFixedStepTasks "2"
+  UseSingleCommonBaseRate "2"
+  LossVariableLimitExceededMsg "3"
+  NegativeSwitchLossMsg "3"
+  DivisionByZeroMsg "3"
+  StiffnessDetectionMsg "2"
+  MaxConsecutiveZCs "1000"
+  AlgebraicLoopWithStateMachineMsg "2"
+  AssertionAction "1"
+  InitializationCommands ""
+  InitialState  "1"
+  SystemState   ""
+  TaskingMode   "1"
+  TaskConfigurations ""
+  CodeGenParameterInlining "2"
+  CodeGenFloatingPointFormat "2"
+  CodeGenAbsTimeUsageMsg "3"
+  CodeGenBaseName ""
+  CodeGenOutputDir ""
+  CodeGenExtraOpts ""
+  CodeGenTarget "VeriStand"
+  CodeGenTargetSettings "AAAAfwAAAAAlUU1hcDxRU3RyaW5nLFFNYXA8UVN0cmluZyxRU3Rya"
+"W5nPiA+AAAAAAEAAAASAFYAZQByAGkAUwB0AGEAbgBkAAAADwAAABgAdABhAHIAZwBVAHMAZQByAE"
+"4AYQBtAGUAAAAKAGEAZABtAGkAbgAAABgAdABhAHIAZwBQAGEAcwBzAHcAbwByAGQAAAAAAAAADAB"
+"0AGEAcgBnAEkAUAAAAA4AMAAuADAALgAwAC4AMAAAABIAbgBpAG0AYQB4AEYAaQBsAGUAAAAAAAAA"
+"FABpAG4AcwB0AGEAbABsAEQAaQByAAAAAAAAABQAZABlAHAAbABvAHkARgBsAGEAZwAAAAIAMQAAA"
+"BYAYwBvAGQAZQBnAGUAbgBGAGwAYQBnAAAAAgAwAAAAHABjAGgAZQBjAGsAcwB1AG0ATABlAG4AZw"
+"B0AGgAAAACADUAAAAgAGMAaABlAGMAawBzAHUAbQBEAGEAdABhAFQAeQBwAGUAAAACADYAAAASAGI"
+"AdQBpAGwAZABUAHkAcABlAAAAAgAzAAAAFgBhAG8ATQBpAG4ATQBhAHgAVgBhAGwAAAAQAFsALQAx"
+"ADAALAAxADAAXQAAABYAYQBpAE0AaQBuAE0AYQB4AFYAYQBsAAAAEABbAC0AMQAwACwAMQAwAF0AA"
+"AAgAFYAZQByAGkAUwB0AGEAbgBkAFYAZQByAHMAaQBvAG4AAAACADMAAAAaAFQAQQBSAEcARQBUAF"
+"8ARABFAFYASQBDAEX/////AAAAGgBFAFgAVABFAFIATgBBAEwAXwBNAE8ARABFAAAAAgAx"
+  ExtendedMatrixPrecision "1"
+  MatrixSignificanceCheck "2"
+  EnableStateSpaceSplitting "2"
+  DisplayStateSpaceSplitting "1"
+  DiscretizationMethod "2"
+  ExternalModeSettings "AAAAfwAAAAAWUU1hcDxRU3RyaW5nLFFTdHJpbmc+AAAAAAYAAAAYAF"
+"QAcgBpAGcAZwBlAHIAVgBhAGwAdQBlAAAAAgAwAAAAGABUAHIAaQBnAGcAZQByAEQAZQBsAGEAeQA"
+"AAAIAMAAAABYAUwBlAG4AcwBpAHQAaQB2AGkAdAB5AAAAAgAwAAAAFgBSAGUAZgByAGUAcwBoAFIA"
+"YQB0AGUAAAAEADIAMAAAABQATgB1AG0AUwBhAG0AcABsAGUAcwAAAAgAOAAxADkAMgAAABQARABlA"
+"GMAaQBtAGEAdABpAG8AbgAAAAIAMQ=="
+  AlgebraicLoopMethod "1"
+  AlgebraicLoopTolerance "1e-6"
+  ScriptsDialogGeometry "[108 111 1196 398]"
+  ScriptsDialogSplitterPos "47"
+  Schematic {
+    Location      [437, 64; 1149, 391]
+    ZoomFactor    1.49863
+    SliderPosition [0, 0]
+    ShowBrowser   off
+    BrowserWidth  100
+    Component {
+      Type          SignalMux
+      Name          "Mux"
+      Show          off
+      Position      [365, 105]
+      Direction     right
+      Flipped       off
+      Parameter {
+        Variable      "Width"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Subsystem
+      Name          "Engine"
+      Show          on
+      Position      [235, 135]
+      Direction     up
+      Flipped       off
+      Frame         [-100, -50; 100, 50]
+      LabelPosition [0, 53]
+      LabelAlign    up
+      TreatAsAtomicUnit on
+      SampleTime    "-1"
+      TaskingMode "1"
+      CodeGenEnable on
+      CodeGenSampleTime "0.01"
+      CodeGenDiscretizationMethod "2"
+      CodeGenInliningExceptions "AAAACwAAAAAFAAAANgBUAG8AcgBxAHUAZQAgAEMAYQBsA"
+"GMAdQBsAGEAdABpAG8AbgAvAEkAZABsAGUAIABSAFAATQAAADQASQBuAHQAZQByAG4AYQBsACAAVA"
+"BlAG0AcAAvAEEAbQBiAGkAZQBuAHQAIABUAGUAbQBwAAAAOgBJAG4AdABlAHIAbgBhAGwAIABUAGU"
+"AbQBwAC8ATwBwAGUAcgBhAHQAaQBuAGcAIABEAGUAbAB0AGEAAAA2AEkAbgB0AGUAcgBuAGEAbAAg"
+"AFQAZQBtAHAALwBSAGUAZABsAGkAbgBlACAARABlAGwAdABhAAAAMgBJAG4AdABlAHIAbgBhAGwAI"
+"ABUAGUAbQBwAC8AUgBlAGQAbABpAG4AZQAgAFIAUABN"
+      CodeGenTarget "VeriStand"
+      CodeGenTargetSettings "AAAAfwAAAAAlUU1hcDxRU3RyaW5nLFFNYXA8UVN0cmluZyxRU"
+"3RyaW5nPiA+AAAAAAEAAAASAFYAZQByAGkAUwB0AGEAbgBkAAAAEgAAACIAdgBzAFcAbwByAGsAcw"
+"BwAGEAYwBlAFMAYwByAGUAZQBuAAAAAAAAABwAdgBzAEUAZABpAHQAbwByAFMAYwByAGUAZQBuAAA"
+"AJgBlAG4AZwBpAG4AZQBfAGQAZQBtAG8ALgBuAGkAdgBzAHMAYwByAAAAGgB2AHMAQwBhAGwAaQBi"
+"AHIAYQB0AGkAbwBuAAAAAAAAABgAdABhAHIAZwBVAHMAZQByAE4AYQBtAGUAAAAKAGEAZABtAGkAb"
+"gAAABgAdABhAHIAZwBQAGEAcwBzAHcAbwByAGQAAAAAAAAADAB0AGEAcgBnAEkAUAAAAA4AMAAuAD"
+"AALgAwAC4AMAAAABIAbgBpAG0AYQB4AEYAaQBsAGUAAAAeAGUAbgBnAGkAbgBlAF8AZABlAG0AbwA"
+"uAG4AYwBlAAAAFABpAG4AcwB0AGEAbABsAEQAaQByAAAAVgBDADoALwBVAHMAZQByAHMALwBCAHIA"
+"eQBhAG4ALwBnAGkAdAAvAG4AaQAvAHQAcwBwAC8AcwByAGMALwB2AGUAcgBpAHQAYQByAGcAZQB0A"
+"C8AYwBnAAAAFABkAGUAcABsAG8AeQBGAGwAYQBnAAAAAgAxAAAAFgBjAG8AZABlAGcAZQBuAEYAbA"
+"BhAGcAAAACADAAAAAcAGMAaABlAGMAawBzAHUAbQBMAGUAbgBnAHQAaAAAAAIANQAAACAAYwBoAGU"
+"AYwBrAHMAdQBtAEQAYQB0AGEAVAB5AHAAZQAAAAIANgAAABIAYgB1AGkAbABkAFQAeQBwAGUAAAAC"
+"ADMAAAAWAGEAbwBNAGkAbgBNAGEAeABWAGEAbAAAABAAWwAtADEAMAAsADEAMABdAAAAFgBhAGkAT"
+"QBpAG4ATQBhAHgAVgBhAGwAAAAQAFsALQAxADAALAAxADAAXQAAACAAVgBlAHIAaQBTAHQAYQBuAG"
+"QAVgBlAHIAcwBpAG8AbgAAAAIAMwAAABoAVABBAFIARwBFAFQAXwBEAEUAVgBJAEMARf////8AAAA"
+"aAEUAWABUAEUAUgBOAEEATABfAE0ATwBEAEUAAAACADE="
+      ExternalModeSettings "AAAAfwAAAAAWUU1hcDxRU3RyaW5nLFFTdHJpbmc+AAAAAAYAAA"
+"AYAFQAcgBpAGcAZwBlAHIAVgBhAGwAdQBlAAAAAgAwAAAAGABUAHIAaQBnAGcAZQByAEQAZQBsAGE"
+"AeQAAAAIAMAAAABYAUwBlAG4AcwBpAHQAaQB2AGkAdAB5AAAAAgAwAAAAFgBSAGUAZgByAGUAcwBo"
+"AFIAYQB0AGUAAAAEADIAMAAAABQATgB1AG0AUwBhAG0AcABsAGUAcwAAAAgAOAAxADkAMgAAABQAR"
+"ABlAGMAaQBtAGEAdABpAG8AbgAAAAIAMQ=="
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      Terminal {
+        Type          Input
+        Position      [-100, -25]
+        Direction     left
+        Index         "1"
+      }
+      Terminal {
+        Type          Input
+        Position      [-100, 25]
+        Direction     left
+        Index         "2"
+      }
+      Terminal {
+        Type          Output
+        Position      [104, 25]
+        Direction     right
+        Index         "1"
+      }
+      Terminal {
+        Type          Output
+        Position      [104, -25]
+        Direction     right
+        Index         "2"
+      }
+      Schematic {
+        Location      [301, 469; 1196, 873]
+        ZoomFactor    1.30957
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          Reference
+          SrcComponent  "NI_Lib/Signal In"
+          Name          "Command RPM"
+          Show          on
+          Position      [65, 135]
+          Direction     up
+          Flipped       off
+          Frame         [-25, -20; 25, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          Parameter {
+            Variable      "dataType"
+            Value         "10"
+            Show          off
+          }
+          Parameter {
+            Variable      "TargetPortIndices"
+            Value         "1"
+            Show          off
+          }
+          Terminal {
+            Type          Output
+            Position      [29, 0]
+            Direction     right
+          }
+        }
+        Component {
+          Type          Reference
+          SrcComponent  "NI_Lib/Signal In"
+          Name          "Command Engine On"
+          Show          on
+          Position      [65, 235]
+          Direction     up
+          Flipped       off
+          Frame         [-25, -20; 25, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          Parameter {
+            Variable      "dataType"
+            Value         "10"
+            Show          off
+          }
+          Parameter {
+            Variable      "TargetPortIndices"
+            Value         "2"
+            Show          off
+          }
+          Terminal {
+            Type          Output
+            Position      [29, 0]
+            Direction     right
+          }
+        }
+        Component {
+          Type          Reference
+          SrcComponent  "NI_Lib/Signal Out"
+          Name          "Engine Temp"
+          Show          on
+          Position      [620, 230]
+          Direction     up
+          Flipped       off
+          Frame         [-25, -20; 25, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          Parameter {
+            Variable      "dataType"
+            Value         "10"
+            Show          off
+          }
+          Parameter {
+            Variable      "TargetPortIndices"
+            Value         "3"
+            Show          off
+          }
+          Terminal {
+            Type          Input
+            Position      [-25, 0]
+            Direction     left
+          }
+        }
+        Component {
+          Type          Reference
+          SrcComponent  "NI_Lib/Signal Out"
+          Name          "RPM"
+          Show          on
+          Position      [620, 135]
+          Direction     up
+          Flipped       off
+          Frame         [-25, -20; 25, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          Parameter {
+            Variable      "dataType"
+            Value         "10"
+            Show          off
+          }
+          Parameter {
+            Variable      "TargetPortIndices"
+            Value         "4"
+            Show          off
+          }
+          Terminal {
+            Type          Input
+            Position      [-25, 0]
+            Direction     left
+          }
+        }
+        Component {
+          Type          Subsystem
+          Name          "Torque Calculation"
+          Show          on
+          Position      [190, 140]
+          Direction     up
+          Flipped       off
+          Frame         [-45, -20; 45, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          SampleTime    "-1"
+          CodeGenDiscretizationMethod "2"
+          CodeGenTarget "Generic"
+          MaskDisplayLang "2"
+          MaskIconFrame on
+          MaskIconOpaque off
+          MaskIconRotates on
+          Terminal {
+            Type          Input
+            Position      [-45, -5]
+            Direction     left
+          }
+          Terminal {
+            Type          Output
+            Position      [49, -5]
+            Direction     right
+          }
+          Terminal {
+            Type          Input
+            Position      [-45, 10]
+            Direction     left
+          }
+          Schematic {
+            Location      [706, 462; 989, 630]
+            ZoomFactor    1
+            SliderPosition [0, 0]
+            ShowBrowser   off
+            BrowserWidth  100
+            Component {
+              Type          Input
+              Name          "Cmd RPM"
+              Show          on
+              Position      [65, 110]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "1"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          Output
+              Name          "Torque"
+              Show          on
+              Position      [370, 110]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "2"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          Constant
+              Name          "Idle RPM"
+              Show          on
+              Position      [70, 70]
+              Direction     right
+              Flipped       off
+              Frame         [-25, -10; 25, 10]
+              LabelPosition [0, 13]
+              LabelAlign    up
+              Parameter {
+                Variable      "Value"
+                Value         "900"
+                Show          off
+              }
+              Parameter {
+                Variable      "DataType"
+                Value         "10"
+                Show          off
+              }
+            }
+            Component {
+              Type          MinMax
+              Name          "Min/Max"
+              Show          off
+              Position      [200, 105]
+              Direction     up
+              Flipped       off
+              Parameter {
+                Variable      "Operation"
+                Value         "2"
+                Show          off
+              }
+              Parameter {
+                Variable      "Inputs"
+                Value         "2"
+                Show          off
+              }
+            }
+            Component {
+              Type          Input
+              Name          "On"
+              Show          on
+              Position      [235, 60]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "3"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          SignalSwitch
+              Name          "Switch"
+              Show          off
+              Position      [260, 110]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Criteria"
+                Value         "3"
+                Show          off
+              }
+              Parameter {
+                Variable      "Threshold"
+                Value         "0"
+                Show          off
+              }
+            }
+            Component {
+              Type          Gain
+              Name          "RPM to Torque"
+              Show          on
+              Position      [310, 110]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "K"
+                Value         "2*pi/60*6/7/3"
+                Show          off
+              }
+              Parameter {
+                Variable      "Multiplication"
+                Value         "1"
+                Show          off
+              }
+              Parameter {
+                Variable      "DataType"
+                Value         "10"
+                Show          off
+              }
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Idle RPM"
+              SrcTerminal   1
+              Points        [170, 70]
+              DstComponent  "Min/Max"
+              DstTerminal   2
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Cmd RPM"
+              SrcTerminal   1
+              DstComponent  "Min/Max"
+              DstTerminal   3
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Min/Max"
+              SrcTerminal   1
+              DstComponent  "Switch"
+              DstTerminal   2
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "On"
+              SrcTerminal   1
+              Points        [260, 60]
+              DstComponent  "Switch"
+              DstTerminal   4
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Switch"
+              SrcTerminal   1
+              DstComponent  "RPM to Torque"
+              DstTerminal   1
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "RPM to Torque"
+              SrcTerminal   2
+              DstComponent  "Torque"
+              DstTerminal   1
+            }
+          }
+        }
+        Component {
+          Type          Subsystem
+          Name          "Internal Temp"
+          Show          on
+          Position      [190, 225]
+          Direction     up
+          Flipped       off
+          Frame         [-45, -20; 45, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          SampleTime    "-1"
+          CodeGenDiscretizationMethod "2"
+          CodeGenTarget "Generic"
+          MaskDisplayLang "2"
+          MaskIconFrame on
+          MaskIconOpaque off
+          MaskIconRotates on
+          Terminal {
+            Type          Input
+            Position      [-45, -5]
+            Direction     left
+          }
+          Terminal {
+            Type          Output
+            Position      [49, 5]
+            Direction     right
+          }
+          Terminal {
+            Type          Input
+            Position      [-45, 10]
+            Direction     left
+          }
+          Schematic {
+            Location      [131, 122; 953, 567]
+            ZoomFactor    1.20251
+            SliderPosition [0, -1]
+            ShowBrowser   off
+            BrowserWidth  100
+            Component {
+              Type          Input
+              Name          "RPM"
+              Show          on
+              Position      [120, 115]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "1"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          Output
+              Name          "Temp"
+              Show          on
+              Position      [435, 185]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "2"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          Constant
+              Name          "Ambient Temp"
+              Show          on
+              Position      [185, 245]
+              Direction     right
+              Flipped       off
+              Frame         [-25, -10; 25, 10]
+              LabelPosition [0, 13]
+              LabelAlign    up
+              Parameter {
+                Variable      "Value"
+                Value         "25"
+                Show          off
+              }
+              Parameter {
+                Variable      "DataType"
+                Value         "10"
+                Show          off
+              }
+            }
+            Component {
+              Type          Constant
+              Name          "Operating Delta"
+              Show          on
+              Position      [185, 155]
+              Direction     right
+              Flipped       off
+              Frame         [-25, -10; 25, 10]
+              LabelPosition [0, 13]
+              LabelAlign    up
+              Parameter {
+                Variable      "Value"
+                Value         "65"
+                Show          off
+              }
+              Parameter {
+                Variable      "DataType"
+                Value         "10"
+                Show          off
+              }
+            }
+            Component {
+              Type          Constant
+              Name          "Redline Delta"
+              Show          on
+              Position      [185, 200]
+              Direction     right
+              Flipped       off
+              Frame         [-25, -10; 25, 10]
+              LabelPosition [0, 13]
+              LabelAlign    up
+              Parameter {
+                Variable      "Value"
+                Value         "100"
+                Show          off
+              }
+              Parameter {
+                Variable      "DataType"
+                Value         "10"
+                Show          off
+              }
+            }
+            Component {
+              Type          SignalSwitch
+              Name          "Switch1"
+              Show          off
+              Position      [275, 180]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Criteria"
+                Value         "3"
+                Show          off
+              }
+              Parameter {
+                Variable      "Threshold"
+                Value         "0"
+                Show          off
+              }
+            }
+            Component {
+              Type          ConstantRelationalOperator
+              Name          "Redline RPM"
+              Show          on
+              Position      [195, 115]
+              Direction     left
+              Flipped       on
+              Frame         [-40, -10; 40, 10]
+              LabelPosition [0, -13]
+              LabelAlign    down
+              Parameter {
+                Variable      "Operator"
+                Value         "3"
+                Show          off
+              }
+              Parameter {
+                Variable      "Threshold"
+                Value         "7000"
+                Show          off
+              }
+            }
+            Component {
+              Type          Input
+              Name          "On"
+              Show          on
+              Position      [315, 115]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "3"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          SignalSwitch
+              Name          "Switch"
+              Show          off
+              Position      [340, 185]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Criteria"
+                Value         "3"
+                Show          off
+              }
+              Parameter {
+                Variable      "Threshold"
+                Value         "0"
+                Show          off
+              }
+            }
+            Component {
+              Type          Sum
+              Name          "Sum"
+              Show          off
+              Position      [385, 185]
+              Direction     up
+              Flipped       off
+              Parameter {
+                Variable      "IconShape"
+                Value         "2"
+                Show          off
+              }
+              Parameter {
+                Variable      "Inputs"
+                Value         "|++"
+                Show          off
+              }
+              Parameter {
+                Variable      "DataType"
+                Value         "10"
+                Show          off
+              }
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "RPM"
+              SrcTerminal   1
+              DstComponent  "Redline RPM"
+              DstTerminal   1
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Redline RPM"
+              SrcTerminal   2
+              Points        [275, 115]
+              DstComponent  "Switch1"
+              DstTerminal   4
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Redline Delta"
+              SrcTerminal   1
+              Points        [240, 200; 240, 185]
+              DstComponent  "Switch1"
+              DstTerminal   3
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Operating Delta"
+              SrcTerminal   1
+              Points        [240, 155; 240, 175]
+              DstComponent  "Switch1"
+              DstTerminal   2
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "On"
+              SrcTerminal   1
+              Points        [340, 115]
+              DstComponent  "Switch"
+              DstTerminal   4
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Switch1"
+              SrcTerminal   1
+              DstComponent  "Switch"
+              DstTerminal   2
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Switch"
+              SrcTerminal   1
+              DstComponent  "Sum"
+              DstTerminal   2
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Sum"
+              SrcTerminal   1
+              DstComponent  "Temp"
+              DstTerminal   1
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Ambient Temp"
+              SrcTerminal   1
+              Points        [385, 245]
+              DstComponent  "Sum"
+              DstTerminal   3
+            }
+          }
+        }
+        Component {
+          Type          ControlledTorque
+          Name          "Torque"
+          Show          on
+          Position      [270, 135]
+          Direction     right
+          Flipped       on
+          Parameter {
+            Variable      "SecondFlange"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "StateSpaceInlining"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Inertia
+          Name          "Inertia"
+          Show          on
+          Position      [430, 90]
+          Direction     up
+          Flipped       on
+          Parameter {
+            Variable      "J"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "w0"
+            Value         "0"
+            Show          off
+          }
+          Parameter {
+            Variable      "theta0"
+            Value         "0"
+            Show          off
+          }
+        }
+        Component {
+          Type          RotationalSpring
+          Name          "Torsion\nSpring"
+          Show          on
+          Position      [385, 90]
+          Direction     up
+          Flipped       on
+          Parameter {
+            Variable      "c"
+            Value         "2/3"
+            Show          off
+          }
+          Parameter {
+            Variable      "theta0"
+            Value         "0"
+            Show          off
+          }
+          Parameter {
+            Variable      "dtheta0"
+            Value         "0"
+            Show          off
+          }
+        }
+        Component {
+          Type          RotationalSpeedSensor
+          Name          "Speed\nSensor"
+          Show          on
+          Position      [490, 135]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "SecondFlange"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          RotationalDamper
+          Name          "Rotational\nDamper"
+          Show          on
+          Position      [355, 135]
+          Direction     right
+          Flipped       on
+          Parameter {
+            Variable      "D"
+            Value         "6/7"
+            Show          off
+          }
+          Parameter {
+            Variable      "theta0"
+            Value         ""
+            Show          off
+          }
+        }
+        Component {
+          Type          RotationalReference
+          Name          "Rotational\nFrame"
+          Show          off
+          Position      [355, 155]
+          Direction     up
+          Flipped       off
+        }
+        Component {
+          Type          Gain
+          Name          "Rads to RPM"
+          Show          on
+          Position      [540, 135]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "K"
+            Value         "60/(2*pi)"
+            Show          off
+          }
+          Parameter {
+            Variable      "Multiplication"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "10"
+            Show          off
+          }
+        }
+        Component {
+          Type          Gear
+          Name          "Gear"
+          Show          on
+          Position      [315, 90]
+          Direction     up
+          Flipped       on
+          Parameter {
+            Variable      "g"
+            Value         "3"
+            Show          off
+          }
+        }
+        Component {
+          Type          ThermalResistor
+          Name          "Rth"
+          Show          on
+          Position      [325, 200]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Rth"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          ThermalCapacitor
+          Name          "Cth"
+          Show          on
+          Position      [395, 230]
+          Direction     down
+          Flipped       on
+          Parameter {
+            Variable      "Cth"
+            Value         "10"
+            Show          off
+          }
+          Parameter {
+            Variable      "T_init"
+            Value         "25"
+            Show          off
+          }
+        }
+        Component {
+          Type          Thermometer
+          Name          "Tengine"
+          Show          on
+          Position      [480, 230]
+          Direction     up
+          Flipped       off
+        }
+        Component {
+          Type          ControlledTemperature
+          Name          "Tinternal"
+          Show          on
+          Position      [270, 230]
+          Direction     down
+          Flipped       on
+          Parameter {
+            Variable      "StateSpaceInlining"
+            Value         "1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Scope
+          Name          "Scope"
+          Show          on
+          Position      [220, 65]
+          Direction     up
+          Flipped       off
+          Location      [1200, 468; 1734, 900]
+          State         "AAAA/wAAAAD9AAAAAgAAAAEAAAC0AAAB2/wCAAAAA/sAAAAQAFoAb"
+"wBvAG0AQQByAGUAYQAAAAAA/////wAAAFwA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAA"
+"AA/////wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAALwAAAdsAAABmAP///wAAAAMAAAIWAAA"
+"Al/wBAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAAAhYAAABQAP///wAAAhYAAAGV"
+"AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AA"
+"AAAAAAAAA=="
+          SavedViews    "AAAAAgAAAAA="
+          HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJA"
+"AAACQAAAGQAAAACAAAAZAAAAAMAAABkAAAAAQAAAGQAAAAGAAAAZAAAAAcAAABkAAAABAAAAGQAAA"
+"AFAAAAZAAAAAgAAABkAAACFgAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAAD"
+"hAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAA"
+"AAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAA"
+"AAAAAE1AAAAAQAAAAAAAAPoAAAAACQ="
+          PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"QAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+          Axes          "2"
+          TimeRange     "0"
+          ScrollingMode "1"
+          SingleTimeAxis "1"
+          Open          "0"
+          Ts            "-1"
+          SampleLimit   "0"
+          XAxisLabel    "Time (s)"
+          ShowLegend    "2"
+          Axis {
+            Name          "Engine Speed"
+            AutoScale     1
+            MinValue      0
+            MaxValue      1
+            Signals       {"RPM Reference", "RPM Output"}
+            SignalTypes   [ ]
+            AxisLabel     "RPM"
+            Untangle      0
+            KeepBaseline  off
+            BaselineValue 0
+          }
+          Axis {
+            Name          "Temperature"
+            AutoScale     1
+            MinValue      0
+            MaxValue      1
+            Signals       {"Internal Temperature", "Engine Temperature"}
+            SignalTypes   [ ]
+            AxisLabel     "C"
+            Untangle      0
+            KeepBaseline  off
+            BaselineValue 0
+          }
+          Fourier {
+            SingleXAxis       on
+            AxisLabel         "Frequency"
+            Scaling           0
+            PhaseDisplay      0
+            ShowFourierLegend off
+            Axis {
+              Name          ""
+              AutoScale     1
+              MinValue      0
+              MaxValue      1
+              Signals       {}
+              Untangle      0
+              KeepBaseline  off
+              BaselineValue 0
+            }
+            Axis {
+              Name          ""
+              AutoScale     1
+              MinValue      0
+              MaxValue      1
+              Signals       {}
+              Untangle      0
+              KeepBaseline  off
+              BaselineValue 0
+            }
+          }
+        }
+        Component {
+          Type          PlecsProbe
+          Name          "RPMs"
+          Show          on
+          Position      [130, 55]
+          Direction     left
+          Flipped       on
+        }
+        Component {
+          Type          PlecsProbe
+          Name          "Temps"
+          Show          on
+          Position      [130, 80]
+          Direction     right
+          Flipped       off
+        }
+        Component {
+          Type          RotationalReference
+          Name          "Rotational\nFrame1"
+          Show          off
+          Position      [270, 155]
+          Direction     up
+          Flipped       off
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Command RPM"
+          SrcTerminal   1
+          DstComponent  "Torque Calculation"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Rotational
+          SrcComponent  "Rotational\nFrame"
+          SrcTerminal   1
+          DstComponent  "Rotational\nDamper"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Rotational
+          SrcComponent  "Inertia"
+          SrcTerminal   1
+          DstComponent  "Torsion\nSpring"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Rotational
+          SrcComponent  "Torsion\nSpring"
+          SrcTerminal   1
+          Points        [355, 90]
+          Branch {
+            DstComponent  "Gear"
+            DstTerminal   2
+          }
+          Branch {
+            DstComponent  "Rotational\nDamper"
+            DstTerminal   1
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Speed\nSensor"
+          SrcTerminal   2
+          DstComponent  "Rads to RPM"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Rotational
+          SrcComponent  "Torque"
+          SrcTerminal   1
+          Points        [270, 90]
+          DstComponent  "Gear"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Rotational
+          SrcComponent  "Inertia"
+          SrcTerminal   2
+          Points        [490, 90]
+          DstComponent  "Speed\nSensor"
+          DstTerminal   1
+        }
+        Connection {
+          Type          HeatPipe
+          SrcComponent  "Rth"
+          SrcTerminal   1
+          Points        [395, 200]
+          Branch {
+            DstComponent  "Cth"
+            DstTerminal   1
+          }
+          Branch {
+            Points        [480, 200]
+            DstComponent  "Tengine"
+            DstTerminal   1
+          }
+        }
+        Connection {
+          Type          HeatPipe
+          SrcComponent  "Tengine"
+          SrcTerminal   2
+          Points        [480, 255; 395, 255]
+          Branch {
+            DstComponent  "Cth"
+            DstTerminal   2
+          }
+          Branch {
+            Points        [270, 255]
+            DstComponent  "Tinternal"
+            DstTerminal   2
+          }
+        }
+        Connection {
+          Type          HeatPipe
+          SrcComponent  "Rth"
+          SrcTerminal   2
+          Points        [270, 200]
+          DstComponent  "Tinternal"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Tengine"
+          SrcTerminal   3
+          DstComponent  "Engine Temp"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Torque Calculation"
+          SrcTerminal   2
+          DstComponent  "Torque"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "RPMs"
+          SrcTerminal   1
+          Points        [175, 55; 175, 60]
+          DstComponent  "Scope"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Temps"
+          SrcTerminal   1
+          Points        [175, 80; 175, 70]
+          DstComponent  "Scope"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Rotational
+          SrcComponent  "Rotational\nFrame1"
+          SrcTerminal   1
+          DstComponent  "Torque"
+          DstTerminal   3
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Rads to RPM"
+          SrcTerminal   2
+          Points        [575, 135]
+          Branch {
+            DstComponent  "RPM"
+            DstTerminal   1
+          }
+          Branch {
+            Points        [575, 185; 130, 185]
+            DstComponent  "Internal Temp"
+            DstTerminal   1
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Command Engine On"
+          SrcTerminal   1
+          Points        [115, 235]
+          Branch {
+            Points        [115, 150]
+            DstComponent  "Torque Calculation"
+            DstTerminal   3
+          }
+          Branch {
+            DstComponent  "Internal Temp"
+            DstTerminal   3
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Internal Temp"
+          SrcTerminal   2
+          DstComponent  "Tinternal"
+          DstTerminal   3
+        }
+      }
+    }
+    Component {
+      Type          Step
+      Name          "Engine Start"
+      Show          on
+      Position      [40, 160]
+      Direction     right
+      Flipped       off
+      Parameter {
+        Variable      "Time"
+        Value         "10"
+        Show          off
+      }
+      Parameter {
+        Variable      "Before"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "After"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
+        Show          off
+      }
+    }
+    Component {
+      Type          Step
+      Name          "RPM Rev"
+      Show          on
+      Position      [40, 110]
+      Direction     right
+      Flipped       off
+      Parameter {
+        Variable      "Time"
+        Value         "50"
+        Show          off
+      }
+      Parameter {
+        Variable      "Before"
+        Value         "2000"
+        Show          off
+      }
+      Parameter {
+        Variable      "After"
+        Value         "8000"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
+        Show          off
+      }
+    }
+    Component {
+      Type          Scope
+      Name          "Scope"
+      Show          on
+      Position      [430, 160]
+      Direction     up
+      Flipped       off
+      Location      [1149, 63; 1672, 420]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAC0AAABSvwCAAAAA/sAAAAQAFoAbwBvA"
+"G0AQQByAGUAYQAAAAAA/////wAAAIQA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAGYA////+wAAAAwAVAByAGEAYwBlAHMAAAAALwAAAUoAAABmAP///wAAAAMAAAILAAAApPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAAAgsAAABQAP///wAAAgsAAAFKAAAA"
+"BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
+"AAAAA=="
+      SavedViews    "AAAAAgAAAAA="
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAC"
+"QAAAGQAAAAIAAAAZAAAAAcAAABkAAAABgAAAGQAAAAFAAAAZAAAAAQAAABkAAAAAwAAAGQAAAACAA"
+"AAZAAAAAEAAABkAAAAowAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAAB/AAA"
+"AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
+"AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
+"AAkAAAAAQAAAAAAAAPoAAAAACQ="
+      PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
+"AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"=="
+      Axes          "3"
+      TimeRange     "0"
+      ScrollingMode "1"
+      SingleTimeAxis "1"
+      Open          "1"
+      Ts            "-1"
+      SampleLimit   "0"
+      XAxisLabel    "Time (s)"
+      ShowLegend    "2"
+      Axis {
+        Name          "Engine Speed"
+        AutoScale     1
+        MinValue      0
+        MaxValue      1
+        Signals       {"RPM Reference", "RPM Output"}
+        SignalTypes   [ ]
+        AxisLabel     "RPM"
+        Untangle      0
+        KeepBaseline  off
+        BaselineValue 0
+      }
+      Axis {
+        Name          "Temperature"
+        AutoScale     1
+        MinValue      0
+        MaxValue      1
+        Signals       {"Engine Temp."}
+        SignalTypes   [ ]
+        AxisLabel     "C"
+        Untangle      0
+        KeepBaseline  off
+        BaselineValue 0
+      }
+      Axis {
+        Name          "Engine Status"
+        AutoScale     1
+        MinValue      0
+        MaxValue      1
+        Signals       {}
+        SignalTypes   [ ]
+        Untangle      0
+        KeepBaseline  off
+        BaselineValue 0
+      }
+      Fourier {
+        SingleXAxis       on
+        AxisLabel         "Frequency"
+        Scaling           0
+        PhaseDisplay      0
+        ShowFourierLegend off
+        Axis {
+          Name          ""
+          AutoScale     1
+          MinValue      0
+          MaxValue      1
+          Signals       {}
+          Untangle      0
+          KeepBaseline  off
+          BaselineValue 0
+        }
+        Axis {
+          Name          ""
+          AutoScale     1
+          MinValue      0
+          MaxValue      1
+          Signals       {}
+          Untangle      0
+          KeepBaseline  off
+          BaselineValue 0
+        }
+        Axis {
+          Name          ""
+          AutoScale     1
+          MinValue      0
+          MaxValue      1
+          Signals       {}
+          Untangle      0
+          KeepBaseline  off
+          BaselineValue 0
+        }
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Engine"
+      SrcTerminal   3
+      DstComponent  "Scope"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Mux"
+      SrcTerminal   1
+      Points        [390, 105; 390, 150]
+      DstComponent  "Scope"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Engine"
+      SrcTerminal   4
+      DstComponent  "Mux"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "RPM Rev"
+      SrcTerminal   1
+      Points        [110, 110]
+      Branch {
+        DstComponent  "Engine"
+        DstTerminal   1
+      }
+      Branch {
+        Points        [110, 60; 350, 60]
+        DstComponent  "Mux"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Engine Start"
+      SrcTerminal   1
+      Points        [110, 160]
+      Branch {
+        DstComponent  "Engine"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [110, 205; 390, 205; 390, 170]
+        DstComponent  "Scope"
+        DstTerminal   3
+      }
+    }
+    Annotation {
+      Name          "Engine Demo\nwith code generation for \nNI VeriStand Targ"
+"ets"
+      Position      [245, 30]
+    } 
+  }
+  ProbeBlock {
+    Tag           "engine_demo/Engine/RPMs"
+    Probe {
+      Component     "RPM to Torque"
+      Path          "Engine/Torque Calculation"
+      Signals       {"Input"}
+    }
+    Probe {
+      Component     "Rads to RPM"
+      Path          "Engine"
+      Signals       {"Output"}
+    }
+  }
+  ProbeBlock {
+    Tag           "engine_demo/Engine/Temps"
+    Probe {
+      Component     "Tinternal"
+      Path          "Engine"
+      Signals       {"Temperature"}
+    }
+    Probe {
+      Component     "Tengine"
+      Path          "Engine"
+      Signals       {"Measured temperature"}
+    }
+  }
+}
+DemoSignature "RH7YTWl0MGi9sGOGwnJLFn6/LzkJi9DJhkctMUY8LqU="

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SourceFile Checksum="940FE66CED3718D9C1C01FAD4D4FF3331F868E4A400BE154C93CD20F68B10897A35B32D4C0F60A0E897BF4328603BDE15E7E2513B1C2E66A9445EED1ED2CE1C6" Timestamp="1D73BA0056F0156" xmlns="http://www.ni.com/PlatformFramework">
+	<SourceModelFeatureSet>
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Configuration Based Software Core" Name="http://www.ni.com/ConfigurationBasedSoftware.Core" OldestCompatibleVersion="6.3.0.49152" Version="6.3.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="LabVIEW Controls" Name="http://www.ni.com/Controls.LabVIEW.Design" OldestCompatibleVersion="7.1.0.49152" Version="7.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="VeriStand Controls" Name="http://www.ni.com/Controls.VeriStand.Design" OldestCompatibleVersion="7.1.0.49152" Version="7.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Editor" Name="http://www.ni.com/PanelCommon" OldestCompatibleVersion="6.1.0.0" Version="6.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Editor" Name="http://www.ni.com/PlatformFramework" OldestCompatibleVersion="7.1.0.49153" Version="7.1.0.49153" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="VeriStand Core Components" Name="http://www.ni.com/VeriStand" OldestCompatibleVersion="7.0.0.49152" Version="7.0.0.49152" />
+		<ApplicationVersionInfo Build="7.1.0.50148" Name="VeriStand" Version="7.1.0.50148" />
+	</SourceModelFeatureSet>
+	<Screen Id="2" xmlns="http://www.ni.com/VeriStand">
+		<ScreenSurface Height="[float]1600" Id="1" Left="[float]0" PanelSizeMode="Fixed" Top="[float]0" Width="[float]2000" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+			<VeriStandChart BaseName="[string]Chart" Height="[float]222" Id="3df54911131453f8dfecdd7df69bea8" Label="[UIModel]1239e4aa687d4b56abbefffe42412c1b" Left="[float]24" PlotAreaMargin="[SMThickness]84,8,21,43" PreferIndexData="[bool]False" RecordTime="[uint]10" RenderMode="[RenderMode]Hardware" SuppressScaleLayout="[bool]False" Top="[float]39" Width="[float]545" xmlns="http://www.ni.com/Controls.VeriStand.Design">
+				<HmiChartAxis Adjuster="[RangeAdjuster]ContinuousChart" Id="6df4ebb93ae442718f13caa020fe2188" Label="[string]System Time" MajorDivisions="[UIModel]330e442edbaa41a6870bb4cdf21a81ad" Orientation="[SMOrientation]Horizontal" Range="[IRange]0, 10, System.Double" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+					<RangeLabeledDivisions Id="330e442edbaa41a6870bb4cdf21a81ad" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+						<p.LabelPresenter Kind="LVRelativeSeconds" Format="G6" />
+					</RangeLabeledDivisions>
+				</HmiChartAxis>
+				<HmiChartAxis Adjuster="[RangeAdjuster]GrowLoosely" Id="2f83ca198b614e03aa55655d5dd8f795" Label="[string]Rad/s" MajorDivisions="[UIModel]b28c733d24ab4c5db6e076a7cfa86bf4" Orientation="[SMOrientation]Vertical" Range="[IRange]0, 32, System.Double" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+					<RangeLabeledDivisions Id="b28c733d24ab4c5db6e076a7cfa86bf4" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+						<p.LabelPresenter Kind="LVRelativeSeconds" Format="G6" />
+					</RangeLabeledDivisions>
+				</HmiChartAxis>
+				<PlotRenderer Id="e3479f09ef844ce90bc0a63033f215a" LineStroke="[SMSolidColorBrush]#ff962428" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="d93e67e78d184b90b6a07cb807d6f4b7" LineStroke="[SMSolidColorBrush]#ff008ee4" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="5a0efdfb996b4f8294bae2ffbd25fbc8" LineStroke="[SMSolidColorBrush]#ffe2b683" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="8109b65c2e1f492e9ca40b9fa80ef6e9" LineStroke="[SMSolidColorBrush]#ffb7ac1f" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="158546ead3ad4f6ea195e0da58fe21d6" LineStroke="[SMSolidColorBrush]#ffaedcef" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="7b8c7356775846c2a02df41dbab9f9b2" LineStroke="[SMSolidColorBrush]#ffa08bb0" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="54cd4f6f7f0d4611a6438d786fb816cf" LineStroke="[SMSolidColorBrush]#ff7f7f7f" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<PlotRenderer Id="62dadec23dfc450c9b3e976e29a17765" LineStroke="[SMSolidColorBrush]#ff91685c" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				<VeriStandChartPlot Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Signals/Scope/SpeedSum_Input_1" HorizontalScale="[UIModel]6df4ebb93ae442718f13caa020fe2188" Id="49ea9e1104084df9ae8e1bbba17db45d" IsDefaultPlot="[bool]False" Label="[string]SpeedSum_Input_1" VerticalScale="[UIModel]2f83ca198b614e03aa55655d5dd8f795">
+					<PlotRenderer Id="703219cced414f91a6d6e16f625cb648" LineStroke="[SMSolidColorBrush]#ff962428" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				</VeriStandChartPlot>
+				<VeriStandChartPlot Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Signals/Scope/SpeedSum_Input_2" HorizontalScale="[UIModel]6df4ebb93ae442718f13caa020fe2188" Id="458f457f0be740bd95e9d81bf3eb26d6" IsDefaultPlot="[bool]False" Label="[string]SpeedSum_Input_2" VerticalScale="[UIModel]2f83ca198b614e03aa55655d5dd8f795">
+					<PlotRenderer Id="9fd7887cdc2443f09938368884fabe9a" LineStroke="[SMSolidColorBrush]#ff008ee4" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				</VeriStandChartPlot>
+			</VeriStandChart>
+			<HmiChartPlotLegend Graph="[UIModel]3df54911131453f8dfecdd7df69bea8" Height="[float]54" Id="fc12562c625454f94cb7750ffc5d7fb" Left="[float]576" Top="[float]39" Visible="[bool]False" />
+			<HmiChartCursorLegend Graph="[UIModel]3df54911131453f8dfecdd7df69bea8" Height="[float]80" Id="e246a9219b464aa98dd5c11630d3fc87" Left="[float]29" MinHeight="[float]80" Top="[float]290" Visible="[bool]False" Width="[float]316" />
+			<HmiChartScaleLegend Graph="[UIModel]3df54911131453f8dfecdd7df69bea8" Height="[float]52" Id="d545e8c847ca43a69fd4845b9cfd287c" Left="[float]494" Top="[float]268" Visible="[bool]False" />
+			<GraphTools Graph="[UIModel]3df54911131453f8dfecdd7df69bea8" Height="[float]0" Id="d9adf9d08d9c4e3f9029eea885b06437" Left="[float]29" Top="[float]268" Visible="[bool]False" Width="[float]0" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+			<Label Height="[float]16" Id="1239e4aa687d4b56abbefffe42412c1b" LabelOwner="[UIModel]3df54911131453f8dfecdd7df69bea8" Left="[float]24" Text="[string]Speed" Top="[float]19" Width="[float]33" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelSwitch BaseName="[string]Round Switch" Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Parameters/Current/Speed_Select/Current_SpeedSelect_SwitchState_(2)" FalseContent="[string]Speed" Height="[float]76" Id="2350ae05dfb540e2aaac9a53315f2f1f" IncludeInCapture="[bool]False" IsLabelBoundToChannel="[bool]False" Label="[UIModel]f6f2e2689b8545828d3dc46c9469ec2c" Left="[float]748" Shape="[SwitchShape]Round" Top="[float]77" TrueContent="[string]Current" Width="[float]136" />
+			<Label Height="[float]16" Id="f6f2e2689b8545828d3dc46c9469ec2c" LabelAlignment="[PartAlignment]TopCenter" LabelOwner="[UIModel]2350ae05dfb540e2aaac9a53315f2f1f" Left="[float]779" Text="[string]Control Mode" Top="[float]57" Width="[float]74" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelSlider BaseName="[string]Slider" Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Parameters/Iout_/Iout__Value_(1)" CoercionMode="[NumericPointerCoercionMode]ToIntervalFromMinimum" Id="71d2e50f325440d2bb60a3cff657a0e7" Interval="[double]0.01" IsLabelBoundToChannel="[bool]False" Label="[UIModel]87933b70100b4ef08f16bff2a5cccca8" Left="[float]646" Maximum="[double]2.5" MinHeight="[float]50" MinWidth="[float]60" Minimum="[double]0" Orientation="[SMOrientation]Horizontal" Top="[float]383" ValueType="[Type]Double" Width="[float]210" />
+			<Label Height="[float]16" Id="87933b70100b4ef08f16bff2a5cccca8" LabelOwner="[UIModel]71d2e50f325440d2bb60a3cff657a0e7" Left="[float]646" Text="[string]Iout__Value" Top="[float]363" Width="[float]60" xmlns="http://www.ni.com/PanelCommon" />
+			<VeriStandChart BaseName="[string]Chart" Height="[float]239" Id="702abf144ca54d1ba2fffea276bf6e70" Label="[UIModel]828280701744406c93f71b9dc8cabe3d" Left="[float]24" PlotAreaMargin="[SMThickness]63,8,21,43" PreferIndexData="[bool]False" RecordTime="[uint]10" RenderMode="[RenderMode]Hardware" SuppressScaleLayout="[bool]False" Top="[float]255" Width="[float]545" xmlns="http://www.ni.com/Controls.VeriStand.Design">
+				<HmiChartAxis Adjuster="[RangeAdjuster]ContinuousChart" Id="c03500cfb8d04868b1085891e7900b2b" Label="[string]System Time" MajorDivisions="[UIModel]395d2d3dbb7f4184bc3ca52ca46326cc" Orientation="[SMOrientation]Horizontal" Range="[IRange]0, 10, System.Double" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+					<RangeLabeledDivisions Id="395d2d3dbb7f4184bc3ca52ca46326cc" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+						<p.LabelPresenter Kind="LVRelativeSeconds" Format="G6" />
+					</RangeLabeledDivisions>
+				</HmiChartAxis>
+				<HmiChartAxis Adjuster="[RangeAdjuster]GrowLoosely" Id="c7d9162f1c3549538300f9c884156ecf" Label="[string]Amps" MajorDivisions="[UIModel]a097db5723ad417c9cbc857bc1f68ecf" Orientation="[SMOrientation]Vertical" Range="[IRange]0, 0.23, System.Double" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+					<RangeLabeledDivisions Id="a097db5723ad417c9cbc857bc1f68ecf" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+						<p.LabelPresenter Kind="LVRelativeSeconds" Format="G6" />
+					</RangeLabeledDivisions>
+				</HmiChartAxis>
+				<VeriStandChartPlot Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Signals/Scope/CurrentSum_Input_1" HorizontalScale="[UIModel]c03500cfb8d04868b1085891e7900b2b" Id="dcb71a2bfc1240ddabfa27c96b47c232" IsDefaultPlot="[bool]False" Label="[string]CurrentSum_Input_1" VerticalScale="[UIModel]c7d9162f1c3549538300f9c884156ecf">
+					<PlotRenderer Id="7deec48786864b248a148fc4f8034d42" LineStroke="[SMSolidColorBrush]#ffaedcef" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				</VeriStandChartPlot>
+				<VeriStandChartPlot Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Signals/Scope/CurrentSum_Input_2" HorizontalScale="[UIModel]c03500cfb8d04868b1085891e7900b2b" Id="6cb07e4348554ca39b248c411c196add" IsDefaultPlot="[bool]False" Label="[string]CurrentSum_Input_2" VerticalScale="[UIModel]c7d9162f1c3549538300f9c884156ecf">
+					<PlotRenderer Id="741107c09b924f90aa011f9f52520ce5" LineStroke="[SMSolidColorBrush]#ff008ee4" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				</VeriStandChartPlot>
+			</VeriStandChart>
+			<HmiChartPlotLegend Graph="[UIModel]702abf144ca54d1ba2fffea276bf6e70" Height="[float]54" Id="275668a2a17e4248b1bde69c09f82821" Left="[float]576" Top="[float]255" Visible="[bool]False" />
+			<HmiChartCursorLegend Graph="[UIModel]702abf144ca54d1ba2fffea276bf6e70" Height="[float]80" Id="f8f45b6616a9439dae9dad9f5d35c756" Left="[float]29" MinHeight="[float]80" Top="[float]523" Visible="[bool]False" Width="[float]316" />
+			<HmiChartScaleLegend Graph="[UIModel]702abf144ca54d1ba2fffea276bf6e70" Height="[float]52" Id="d58c65caded343558e61d372544edbbc" Left="[float]494" Top="[float]501" Visible="[bool]False" />
+			<GraphTools Graph="[UIModel]702abf144ca54d1ba2fffea276bf6e70" Height="[float]0" Id="ffe855ed9c3c4cbca22202557ca8e08c" Left="[float]29" Top="[float]501" Visible="[bool]False" Width="[float]0" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+			<Label Height="[float]16" Id="828280701744406c93f71b9dc8cabe3d" LabelOwner="[UIModel]702abf144ca54d1ba2fffea276bf6e70" Left="[float]24" Text="[string]Current" Top="[float]235" Width="[float]40" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelNumericText BaseName="[string]Numeric" Channel="[string]Targets/Controller/System Channels/Actual Loop Rate" Height="[float]24" Id="d1fea19186c2485d918bb7d7afe7fddb" IsReadOnly="[bool]True" Label="[UIModel]41238f15f2b94a74970c3c75695c9ef8" Left="[float]716" Top="[float]482" UnitAnnotation="[string]Hz" ValueFormatter="[string]LV:G5" ValueType="[Type]Double" Width="[float]70" />
+			<Label Height="[float]16" Id="41238f15f2b94a74970c3c75695c9ef8" LabelOwner="[UIModel]d1fea19186c2485d918bb7d7afe7fddb" Left="[float]716" Text="[string]Actual Loop Rate" Top="[float]462" Width="[float]90" xmlns="http://www.ni.com/PanelCommon" />
+			<VeriStandChart BaseName="[string]Chart" Height="[float]231" Id="4ca7e74bce5147e0a0e279e6247198d9" Label="[UIModel]ce4e4504b0974c9e8f94f134ac981435" Left="[float]24" PlotAreaMargin="[SMThickness]68,8,21,43" PreferIndexData="[bool]False" RecordTime="[uint]10" RenderMode="[RenderMode]Hardware" SuppressScaleLayout="[bool]False" Top="[float]496" Width="[float]545" xmlns="http://www.ni.com/Controls.VeriStand.Design">
+				<HmiChartAxis Adjuster="[RangeAdjuster]ContinuousChart" Id="3c513183da654df68592267e9f4d6837" Label="[string]System Time" MajorDivisions="[UIModel]2b673438d9b84210834d09839a7162ed" Orientation="[SMOrientation]Horizontal" Range="[IRange]0, 10, System.Double" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+					<RangeLabeledDivisions Id="2b673438d9b84210834d09839a7162ed" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+						<p.LabelPresenter Kind="LVRelativeSeconds" Format="G6" />
+					</RangeLabeledDivisions>
+				</HmiChartAxis>
+				<HmiChartAxis Adjuster="[RangeAdjuster]GrowLoosely" Id="945eb3bf1f8f430a993bad17c2ca2df5" Label="[string]D" MajorDivisions="[UIModel]a03cbcc6c8334e12a97f78a8f01c878f" Orientation="[SMOrientation]Vertical" Range="[IRange]0, 1, System.Double" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+					<RangeLabeledDivisions Id="a03cbcc6c8334e12a97f78a8f01c878f" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+						<p.LabelPresenter Kind="LVRelativeSeconds" Format="G6" />
+					</RangeLabeledDivisions>
+				</HmiChartAxis>
+				<VeriStandChartPlot Channel="[string]Targets/Controller/Hardware/Chassis/DAQ/PXI1Slot2/Counter/CO0/Duty Cycle" HorizontalScale="[UIModel]3c513183da654df68592267e9f4d6837" Id="4ba9ad48665742449a9ec2ceb107538f" IsDefaultPlot="[bool]False" Label="[string]Duty Cycle" VerticalScale="[UIModel]945eb3bf1f8f430a993bad17c2ca2df5">
+					<PlotRenderer Id="fca7b8a28be64e818185ccc3cf34dfd5" LineStroke="[SMSolidColorBrush]#ffe2b683" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+				</VeriStandChartPlot>
+			</VeriStandChart>
+			<HmiChartPlotLegend Graph="[UIModel]4ca7e74bce5147e0a0e279e6247198d9" Height="[float]28" Id="a23fbe91f9d24b819575039686082ec2" Left="[float]576" Top="[float]496" Visible="[bool]False" />
+			<HmiChartCursorLegend Graph="[UIModel]4ca7e74bce5147e0a0e279e6247198d9" Height="[float]80" Id="cc761cc931164ec9be5dc1c647b71968" Left="[float]29" MinHeight="[float]80" Top="[float]756" Visible="[bool]False" Width="[float]316" />
+			<HmiChartScaleLegend Graph="[UIModel]4ca7e74bce5147e0a0e279e6247198d9" Height="[float]52" Id="ab927f4db1174cba8dc6575ea4f83509" Left="[float]494" Top="[float]734" Visible="[bool]False" />
+			<GraphTools Graph="[UIModel]4ca7e74bce5147e0a0e279e6247198d9" Height="[float]0" Id="d4c75ff42f3645fa9bf797b103c44488" Left="[float]29" Top="[float]734" Visible="[bool]False" Width="[float]0" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+			<Label Height="[float]16" Id="ce4e4504b0974c9e8f94f134ac981435" LabelOwner="[UIModel]4ca7e74bce5147e0a0e279e6247198d9" Left="[float]24" Text="[string]Duty" Top="[float]476" Width="[float]25" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelLED BaseName="[string]Round LED" Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Parameters/Enable_Switch/EnableSwitch_SwitchState_(0)" ContentVisibility="[Visibility]Visible" FalseBackground="[SMSolidColorBrush]#ffff0000" FalseContent="[string]On" Height="[float]52" Id="3edf1fb0d24345f6855b25b3088f4a16" IsLabelBoundToChannel="[bool]False" IsReadOnly="[bool]False" Label="[UIModel]e517f019c4914539835500b130591b37" Left="[float]651" MinHeight="[float]20" MinWidth="[float]20" Shape="[LEDShape]Round" Top="[float]101" TrueBackground="[SMSolidColorBrush]#ffffffff" TrueContent="[string]Off" Width="[float]51" />
+			<Label Height="[float]16" Id="e517f019c4914539835500b130591b37" LabelAlignment="[PartAlignment]TopCenter" LabelOwner="[UIModel]3edf1fb0d24345f6855b25b3088f4a16" Left="[float]643" Text="[string]PWM Enable" Top="[float]81" Width="[float]67" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelSlider BaseName="[string]Slider" Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Parameters/Speed_/Speed__Hi_(3)" CoercionMode="[NumericPointerCoercionMode]ToIntervalFromMinimum" Id="45d16bb51e9e43bea17d60d379b8aa47" Interval="[double]0.01" IsLabelBoundToChannel="[bool]False" Label="[UIModel]4ad37272f66b429f8a369c3c99490b63" Left="[float]646" Maximum="[double]40" MinHeight="[float]50" MinWidth="[float]60" Minimum="[double]0" Orientation="[SMOrientation]Horizontal" Top="[float]218" ValueType="[Type]Double" Width="[float]210" />
+			<Label Height="[float]16" Id="4ad37272f66b429f8a369c3c99490b63" LabelOwner="[UIModel]45d16bb51e9e43bea17d60d379b8aa47" Left="[float]646" Text="[string]Speed__Hi" Top="[float]198" Width="[float]55" xmlns="http://www.ni.com/PanelCommon" />
+			<ChannelSlider BaseName="[string]Slider" Channel="[string]Targets/Controller/Simulation Models/Models/NI_PXIe/Parameters/Speed_/Speed__Lo_(4)" CoercionMode="[NumericPointerCoercionMode]ToIntervalFromMinimum" Id="192ad68a7e0e4dd3bd81195a3f676736" Interval="[double]0.01" IsLabelBoundToChannel="[bool]False" Label="[UIModel]a701dbbe357848f8850f8fd3bc0fdfd8" Left="[float]646" Maximum="[double]40" MinHeight="[float]50" MinWidth="[float]60" Minimum="[double]0" Orientation="[SMOrientation]Horizontal" Top="[float]298" ValueType="[Type]Double" Width="[float]210" />
+			<Label Height="[float]16" Id="a701dbbe357848f8850f8fd3bc0fdfd8" LabelOwner="[UIModel]192ad68a7e0e4dd3bd81195a3f676736" Left="[float]646" Text="[string]Speed__Lo" Top="[float]278" Width="[float]56" xmlns="http://www.ni.com/PanelCommon" />
+		</ScreenSurface>
+	</Screen>
+</SourceFile>

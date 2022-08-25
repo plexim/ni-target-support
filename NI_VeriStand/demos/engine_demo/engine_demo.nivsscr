@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SourceFile Checksum="DA17DDA63F8789697929B40ED818819CF5824BA58ABE2F3D282EEA6E675CC5A92D2E8AE64494861E03361F55E86A5CD4F86623EB0E27337D308B9677D776929F" Timestamp="1D741067152F737" xmlns="http://www.ni.com/PlatformFramework">
+	<SourceModelFeatureSet>
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Configuration Based Software Core" Name="http://www.ni.com/ConfigurationBasedSoftware.Core" OldestCompatibleVersion="6.3.0.49152" Version="6.3.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="LabVIEW Controls" Name="http://www.ni.com/Controls.LabVIEW.Design" OldestCompatibleVersion="7.1.0.49152" Version="7.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="VeriStand Controls" Name="http://www.ni.com/Controls.VeriStand.Design" OldestCompatibleVersion="7.1.0.49152" Version="7.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Editor" Name="http://www.ni.com/PanelCommon" OldestCompatibleVersion="6.1.0.0" Version="6.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Editor" Name="http://www.ni.com/PlatformFramework" OldestCompatibleVersion="7.1.0.49153" Version="7.1.0.49153" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="VeriStand Core Components" Name="http://www.ni.com/VeriStand" OldestCompatibleVersion="7.0.0.49152" Version="7.0.0.49152" />
+		<ApplicationVersionInfo Build="7.1.0.50148" Name="VeriStand" Version="7.1.0.50148" />
+	</SourceModelFeatureSet>
+	<Screen Id="69" xmlns="http://www.ni.com/VeriStand">
+		<ScreenSurface BackgroundColor="[SMSolidColorBrush]#ffe0e0e0" BackgroundImagePath="[string]" Height="[float]804" Id="1" Left="[float]0" PanelSizeMode="Fixed" Top="[float]0" Width="[float]1200" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+			<ScreenSurfaceCanvas Background="[SMSolidColorBrush]#80808080" BackgroundColor="[SMSolidColorBrush]#ff055ea3" BaseName="[string]Canvas" Height="[float]497" Id="28" Label="[UIModel]29" Left="[float]14" Top="[float]39" Width="[float]1143">
+				<ScreenSurfaceCanvas Background="[SMSolidColorBrush]#80808080" BackgroundColor="[SMSolidColorBrush]#ffeaeaea" BaseName="[string]Canvas" Height="[float]451" Id="30" Label="[UIModel]31" Left="[float]4" Top="[float]43" Width="[float]1135">
+					<ChannelTachometer Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Outports/RPM_(1)" Height="[float]213.858444" Id="14" IsLabelBoundToChannel="[bool]False" Label="[UIModel]15" Left="[float]872" MaximumValue="[double]10000" Top="[float]54" ValueType="[Type]Double" WarningArcThreshold="[double]6" Width="[float]258.7569" />
+					<Label Foreground="[SMColor]#ff524d4f" Height="[float]21" Id="15" LabelAlignment="[PartAlignment]TopCenter" LabelOwner="[UIModel]14" Left="[float]961" Text="[string]Actual RPM" Top="[float]28" Width="[float]81" xmlns="http://www.ni.com/PanelCommon">
+						<FontSetting FontSize="12" Id="64" xmlns="http://www.ni.com/PlatformFramework" />
+					</Label>
+					<ChannelMeter Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Outports/Engine_Temp_(0)" Height="[float]120" Id="18" InteractionMode="[NumericPointerInteractionModes]EditRange" Interval="[double]1" IsLabelBoundToChannel="[bool]False" Label="[UIModel]19" Left="[float]912" Maximum="[double]250" MinHeight="[float]65" MinWidth="[float]110" Minimum="[double]50" ScaleArc="[ArcSweep]180,-180" Top="[float]314" ValueType="[Type]Double" Width="[float]180" />
+					<Label Foreground="[SMColor]#ff524d4f" Height="[float]21" Id="19" LabelAlignment="[PartAlignment]TopCenter" LabelOwner="[UIModel]18" Left="[float]943" Text="[string]Temperature (°C)" Top="[float]288" Width="[float]119" xmlns="http://www.ni.com/PanelCommon">
+						<FontSetting FontSize="12" Id="65" xmlns="http://www.ni.com/PlatformFramework" />
+					</Label>
+					<VeriStandChart BaseName="[string]Chart" Height="[float]329" HistoryLength="[uint]2500" Id="6" Label="[UIModel]13" Left="[float]290" PlotAreaMargin="[SMThickness]63,8,10,43" PreferIndexData="[bool]False" RecordTime="[uint]25" RenderMode="[RenderMode]Hardware" SuppressScaleLayout="[bool]False" Top="[float]93" Width="[float]580" xmlns="http://www.ni.com/Controls.VeriStand.Design">
+						<HmiChartAxis Adjuster="[RangeAdjuster]ContinuousChart" Id="7" Label="[string]Time" MajorDivisions="[UIModel]9" MajorGridLines="[UIModel]52" Orientation="[SMOrientation]Horizontal" Range="[IRange]0, 20, System.Double" ValueType="[Type]Double" Visibility="[SMVisibility]Visible" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+							<RangeLabeledDivisions Id="9" Mode="[RangeDivisionsMode]Auto" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+								<p.LabelPresenter Kind="LVRelativeSeconds" Format="N0" />
+							</RangeLabeledDivisions>
+							<GridLines Id="52" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						</HmiChartAxis>
+						<HmiChartAxis Adjuster="[RangeAdjuster]None" Id="8" Label="[string]Value" MajorDivisions="[UIModel]50" MajorGridLines="[UIModel]51" Orientation="[SMOrientation]Vertical" Range="[IRange]0, 10000, System.Double" ScaleKind="[RangeScaleKind]Linear" ValueType="[Type]Double" xmlns="http://www.ni.com/ConfigurationBasedSoftware.Core">
+							<RangeLabeledDivisions Id="50" Mode="[RangeDivisionsMode]Auto" xmlns="http://www.ni.com/Controls.LabVIEW.Design">
+								<p.LabelPresenter Kind="LVRelativeSeconds" Format="" ShortFormat="0.0#E+0" />
+							</RangeLabeledDivisions>
+							<GridLines Id="51" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						</HmiChartAxis>
+						<PlotRenderer Id="75" LineStroke="[SMSolidColorBrush]#ff962428" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="76" LineStroke="[SMSolidColorBrush]#ff008ee4" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="77" LineStroke="[SMSolidColorBrush]#ffe2b683" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="78" LineStroke="[SMSolidColorBrush]#ffb7ac1f" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="79" LineStroke="[SMSolidColorBrush]#ffaedcef" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="80" LineStroke="[SMSolidColorBrush]#ffa08bb0" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="81" LineStroke="[SMSolidColorBrush]#ff7f7f7f" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<PlotRenderer Id="82" LineStroke="[SMSolidColorBrush]#ff91685c" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<VeriStandChartPlot Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Outports/RPM_(1)" HorizontalScale="[UIModel]7" Id="1bb08fe9d31e4357abe8861f1dca5b8d" IsDefaultPlot="[bool]False" Label="[string]RPM_(1)" VerticalScale="[UIModel]8">
+							<PlotRenderer Id="228862aa96f84787a7d7cf2e0e6590da" LineStroke="[SMSolidColorBrush]#ffe2b683" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						</VeriStandChartPlot>
+						<VeriStandChartPlot Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Inports/Command_RPM_(0)" HorizontalScale="[UIModel]7" Id="d25a9a92bc224571801e34707e8cb0db" IsDefaultPlot="[bool]False" Label="[string]Command_RPM_(0)" VerticalScale="[UIModel]8">
+							<PlotRenderer Id="1e50b2e150904b0b97334bd4f222caad" LineStroke="[SMSolidColorBrush]#ff008ee4" LineThickness="[double]1" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						</VeriStandChartPlot>
+					</VeriStandChart>
+					<HmiChartScaleLegend Graph="[UIModel]6" Height="[float]50" Id="70" Left="[float]870" Top="[float]372" Visible="[bool]False" />
+					<HmiChartPlotLegend Graph="[UIModel]6" Height="[float]54" Id="10" Left="[float]766.12" Top="[float]37" />
+					<HmiChartCursorLegend Graph="[UIModel]6" Height="[float]80" Id="11" Left="[float]295" Top="[float]451" Visible="[bool]False" Width="[float]251" />
+					<GraphTools Graph="[UIModel]6" Height="[float]22" Id="12" Left="[float]295" Top="[float]429" Visible="[bool]False" Width="[float]148" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+					<Label Height="[float]16" Id="13" LabelOwner="[UIModel]6" Left="[float]290" Text="[string]Chart" Top="[float]73" Visible="[bool]False" Width="[float]29" xmlns="http://www.ni.com/PanelCommon" />
+					<ChannelSwitch Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Inports/Command_Engine_On_(1)" ClickMode="[ClickMode]Press" Height="[float]61.8548431" Id="2" IncludeInCapture="[bool]False" IsLabelBoundToChannel="[bool]False" Label="[UIModel]3" Left="[float]97" Shape="[SwitchShape]Power" Top="[float]141" Width="[float]59" />
+					<Label Height="[float]16" Id="3" LabelAlignment="[PartAlignment]TopCenter" LabelOwner="[UIModel]2" Left="[float]95" Text="[string]Start Engine" Top="[float]121" Width="[float]64" xmlns="http://www.ni.com/PanelCommon" />
+					<ChannelNumericText Channel="[string]Targets/Controller/System Channels/System Time" Height="[float]29" Id="20" IsLabelBoundToChannel="[bool]False" IsReadOnly="[bool]True" Label="[UIModel]21" Left="[float]525" MinHeight="[float]22" Top="[float]45" UnitAnnotation="[string]sec" ValueType="[Type]Double" Width="[float]78">
+						<FontSetting FontSize="10.875" Id="71" xmlns="http://www.ni.com/PlatformFramework" />
+					</ChannelNumericText>
+					<Label Height="[float]16" Id="21" LabelOwner="[UIModel]20" Left="[float]525" Text="[string]System Time (sec)" Top="[float]25" Width="[float]94" xmlns="http://www.ni.com/PanelCommon" />
+					<ChannelNumericText Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Parameters/Torque_Calculation/Idle_RPM/IdleRPM_Value_(0)" Height="[float]30" Id="35" IsLabelBoundToChannel="[bool]False" Label="[UIModel]36" Left="[float]290" MinHeight="[float]22" Top="[float]44" UnitAnnotation="[string]" ValueType="[Type]Double" Width="[float]88">
+						<FontSetting FontSize="11.25" Id="72" xmlns="http://www.ni.com/PlatformFramework" />
+					</ChannelNumericText>
+					<Label Height="[float]16" Id="36" LabelOwner="[UIModel]35" Left="[float]290" Text="[string]Idle Speed (RPM)" Top="[float]24" Width="[float]91" xmlns="http://www.ni.com/PanelCommon" />
+					<ChannelNumericText Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Parameters/Internal_Temp/Ambient_Temp/AmbientTemp_Value_(1)" Height="[float]31" Id="37" IsLabelBoundToChannel="[bool]False" Label="[UIModel]38" Left="[float]392" MinHeight="[float]22" Top="[float]44" UnitAnnotation="[string]" ValueType="[Type]Double" Width="[float]85">
+						<FontSetting FontSize="11.625" Id="73" xmlns="http://www.ni.com/PlatformFramework" />
+					</ChannelNumericText>
+					<Label Height="[float]16" Id="38" LabelOwner="[UIModel]37" Left="[float]392" Text="[string]Environment Temp (°C)" Top="[float]24" Width="[float]122" xmlns="http://www.ni.com/PanelCommon" />
+					<Path Data="[PathGeometry]M 0,0 C 0,291.304291 0,402 0,402" Height="[float]403" Id="53" Left="[float]267" ShapeBuilder="[string]" Stroke="[SMSolidColorBrush]#ff524d4f" StrokeThickness="[float]1" Top="[float]23" Width="[float]1" xmlns="http://www.ni.com/PlatformFramework" />
+					<Text Foreground="[SMColor]#ff524d4f" Height="[float]71" Id="54" Left="[float]17" Text="[string]1. Deploy the Engine Demo by selecting &#xD;&#xA;'Operate &gt; Deploy'. &#xD;&#xA;&#xD;&#xA;2. Start the engine." TextWrapping="[TextWrapping]Wrap" Top="[float]30" Width="[float]239" xmlns="http://www.ni.com/PlatformFramework">
+						<FontSetting FontSize="10" Id="66" />
+					</Text>
+					<ChannelNumericText Channel="[string]Targets/Controller/Simulation Models/Models/Engine/Inports/Command_RPM_(0)" Height="[float]32" Id="61" IsLabelBoundToChannel="[bool]False" Label="[UIModel]63" Left="[float]83" MinHeight="[float]22" Top="[float]371" UnitAnnotation="[string]" ValueType="[Type]Double" Width="[float]89">
+						<FontSetting FontSize="12" Id="74" xmlns="http://www.ni.com/PlatformFramework" />
+					</ChannelNumericText>
+					<Text Foreground="[SMColor]#ff524d4f" Height="[float]107" Id="62" Left="[float]17" Text="[string]3. Open the Logging specification&#xD;&#xA;document in the Project Files tab&#xD;&#xA;and click 'Start'.&#xD;&#xA;&#xD;&#xA;4. Set the engine's Desired RPM value &#xD;&#xA;to above 5000 RPM to trigger logging." TextWrapping="[TextWrapping]Wrap" Top="[float]225" Width="[float]227" xmlns="http://www.ni.com/PlatformFramework">
+						<FontSetting FontSize="10" Id="67" />
+					</Text>
+					<Label Height="[float]16" Id="63" LabelAlignment="[PartAlignment]TopCenter" LabelOwner="[UIModel]61" Left="[float]93" Text="[string]Desired RPM" Top="[float]351" Width="[float]68" xmlns="http://www.ni.com/PanelCommon" />
+				</ScreenSurfaceCanvas>
+				<Label Height="[float]16" Id="31" LabelOwner="[UIModel]30" Left="[float]4" Text="[string] " Top="[float]23" Visible="[bool]False" xmlns="http://www.ni.com/PanelCommon" />
+				<Text Foreground="[SMColor]#ffffffff" Height="[float]29" Id="32" Left="[float]510" Text="[string]Engine Demo" TextWrapping="[TextWrapping]Wrap" Top="[float]7" Width="[float]127" xmlns="http://www.ni.com/PlatformFramework">
+					<FontSetting FontSize="16" Id="68" />
+				</Text>
+			</ScreenSurfaceCanvas>
+			<Label Height="[float]16" Id="29" LabelOwner="[UIModel]28" Left="[float]14" Text="[string] " Top="[float]19" Visible="[bool]False" xmlns="http://www.ni.com/PanelCommon" />
+		</ScreenSurface>
+	</Screen>
+</SourceFile>

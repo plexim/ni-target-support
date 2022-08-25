@@ -1,0 +1,3308 @@
+Plecs {
+  Name          "NI_Lib"
+  Version       "4.5"
+  CircuitModel  "ContStateSpace"
+  StartTime     "0.0"
+  TimeSpan      "1.0"
+  Timeout       ""
+  Solver        "dopri"
+  MaxStep       "1e-3"
+  InitStep      "-1"
+  FixedStep     "1e-3"
+  Refine        "1"
+  ZCStepSize    "1e-9"
+  RelTol        "1e-3"
+  AbsTol        "-1"
+  TurnOnThreshold "0"
+  SyncFixedStepTasks "2"
+  UseSingleCommonBaseRate "2"
+  LossVariableLimitExceededMsg "3"
+  NegativeSwitchLossMsg "3"
+  DivisionByZeroMsg "3"
+  StiffnessDetectionMsg "2"
+  MaxConsecutiveZCs "1000"
+  AlgebraicLoopWithStateMachineMsg "3"
+  AssertionAction "1"
+  InitializationCommands ""
+  InitialState  "1"
+  SystemState   ""
+  TaskingMode   "1"
+  TaskConfigurations ""
+  CodeGenParameterInlining "2"
+  CodeGenFloatingPointFormat "2"
+  CodeGenAbsTimeUsageMsg "3"
+  CodeGenBaseName ""
+  CodeGenOutputDir ""
+  CodeGenExtraOpts ""
+  CodeGenTarget "Generic"
+  CodeGenTargetSettings ""
+  ExtendedMatrixPrecision "1"
+  MatrixSignificanceCheck "2"
+  EnableStateSpaceSplitting "2"
+  DisplayStateSpaceSplitting "1"
+  DiscretizationMethod "2"
+  ExternalModeSettings ""
+  AlgebraicLoopMethod "1"
+  AlgebraicLoopTolerance "1e-6"
+  ScriptsDialogGeometry ""
+  ScriptsDialogSplitterPos "0"
+  Terminal {
+    Type          Input
+    Index         "1"
+  }
+  Terminal {
+    Type          Output
+    Index         "1"
+  }
+  Terminal {
+    Type          Input
+    Index         "2"
+  }
+  Terminal {
+    Type          Output
+    Index         "2"
+  }
+  Terminal {
+    Type          Input
+    Index         "3"
+  }
+  Terminal {
+    Type          Output
+    Index         "3"
+  }
+  Terminal {
+    Type          Output
+    Index         "4"
+  }
+  Terminal {
+    Type          Input
+    Index         "4"
+  }
+  Terminal {
+    Type          Input
+    Index         "5"
+  }
+  Terminal {
+    Type          Input
+    Index         "6"
+  }
+  Terminal {
+    Type          Input
+    Index         "7"
+  }
+  Terminal {
+    Type          Input
+    Index         "8"
+  }
+  Schematic {
+    Location      [47, 148; 810, 558]
+    ZoomFactor    1.49863
+    SliderPosition [0, 0]
+    ShowBrowser   off
+    BrowserWidth  100
+    Component {
+      Type          TargetCode
+      Name          "Signal In"
+      Show          on
+      Position      [100, 75]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "1"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local dim  = Block.NumOutputSignals[1]\n"
+"local dataType = Block.Mask.dataType\n"
+"\n"
+"local params = {dim = dim, name = name, dataType = dataType}\n"
+"local err = Target.Coder.RegisterInport(params)\n"
+"\n"
+"if dim==1 then \n"
+"\tOutputSignal:append(\"rtInport.%s\" % {name})\n"
+"else \n"
+"\tfor i = 1, dim do\n"
+"   \tOutputSignal:append(\"rtInport.%s[%i]\" % {name,i-1})  \n"
+"   end\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputSignal = { OutputSignal },\n"
+"  Require = Require\n"
+"}\n"
+      MaskType      "Signal Inport"
+      MaskDescription "Signal inport connection to a compiled model."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/signal_inport_"
+"ni.html"
+      MaskDisplay   "Icon:text('Signal\\nInport')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      Parameter {
+        Variable      "dataType"
+        Prompt        "Data Type"
+        Type          FixedText
+        PossibleValues {"bool", "uint8", "int8", "uint16", "int16", "uint32", ""
+"int32", "float", "double", "floating point (target default)", "inherited"}
+        Value         "10"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+      Schematic {
+        Location      [219, 83; 1698, 482]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetInput
+          Name          "1"
+          Show          on
+          Position      [120, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Output
+          Name          "Out1"
+          Show          off
+          Position      [280, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "dataType"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "1"
+          SrcTerminal   1
+          DstComponent  "Out1"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Signal Out"
+      Show          on
+      Position      [100, 145]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "1"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local dim  = #Block.InputSignal[1]\n"
+"local dataType = Block.Mask.dataType\n"
+"\n"
+"local params = {dim = dim, name = name, dataType = dataType}\n"
+"local err = Target.Coder.RegisterOutport(params)\n"
+"\n"
+"if dim == 1 then\n"
+"  OutputCode:append(\"rtOutport.%s = %s;\" % {name, Block.InputSignal[1][1]})"
+" --TODO: Harmonize indexing w VeriStand\n"
+"else\n"
+"\tfor i = 1, dim do\n"
+"  \t\tOutputCode:append(\"rtOutport.%s[%i] = %s;\" % {name,i-1, Block.InputSi"
+"gnal[1][i]}) --TODO: Harmonize indexing w VeriStand\n"
+"\tend\n"
+"end\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputCode = OutputCode,\n"
+"  Require = Require\n"
+"}"
+      MaskType      "Signal Outport"
+      MaskDescription "Signal outport connection to a compiled model."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/signal_outport"
+"_ni.html"
+      MaskDisplay   "Icon:text('Signal\\nOutport')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      Parameter {
+        Variable      "dataType"
+        Prompt        "Data Type"
+        Type          FixedText
+        PossibleValues {"bool", "uint8", "int8", "uint16", "int16", "uint32", ""
+"int32", "float", "double", "floating point (target default)", "inherited"}
+        Value         "10"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+      Schematic {
+        Location      [189, 68; 1653, 254]
+        ZoomFactor    1.3775
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetOutput
+          Name          "1"
+          Show          on
+          Position      [330, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Input
+          Name          "In1"
+          Show          off
+          Position      [115, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "InitialOutput"
+            Value         "[]"
+            Show          off
+          }
+          Parameter {
+            Variable      "HasDirectFeedthrough"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          DataType
+          Name          "Data Type"
+          Show          off
+          Position      [205, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "DataType"
+            Value         "dataType"
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "In1"
+          SrcTerminal   1
+          DstComponent  "Data Type"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Data Type"
+          SrcTerminal   2
+          DstComponent  "1"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Analog In"
+      Show          on
+      Position      [185, 75]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "2"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local dim  = Block.NumOutputSignals[1]\n"
+"local channel = Block.Mask.channel\n"
+"local dataType = Block.Mask.dataType\n"
+"local scale = Block.Mask.scale\n"
+"local offset = Block.Mask.offset\n"
+"local mode = Block.Mask.mode\n"
+"local min = Block.Mask.minOutput\n"
+"local max = Block.Mask.maxOutput\n"
+"local slot = math.floor(Block.Mask.slotNum)\n"
+"\n"
+"--Associate Analog Input with Inport\n"
+"local params = {dim = dim, name = name, dataType = dataType, channel = channe"
+"l, scale = scale, offset = offset, mode = mode, min=min, max=max, slot = slot"
+" }\n"
+"local err = Target.Coder.RegisterAnalogInput(params)\n"
+"\n"
+"if dim==1 then \n"
+"\tOutputSignal:append(\"rtInport.%s\" % {name})\n"
+"else \n"
+"\tfor i = 1, dim do\n"
+"   \tOutputSignal:append(\"rtInport.%s[%i]\" % {name,i-1})  \n"
+"   end\n"
+"end\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tfor i = 1, dim do\n"
+"\t\t\tRequire:add((\"Slot%i-AnalogInput\" % {slot}),channel[i])\n"
+"\tend\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputSignal = { OutputSignal },\n"
+"  Require = Require\n"
+"}\n"
+      MaskType      "DAQ Analog In"
+      MaskDescription "Output the measured voltage of an analog input channel."
+"\n"
+"\n"
+"The output signal is calculated as input*Scale+Offset, where input is the inp"
+"ut voltage in Volts. The minimum and maximum signal limits apply to the input"
+" signal in volts."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_analog_in_"
+"ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nAnalog\\nIn')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType=10; % Target default floating point\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if ~isreal(channel) || ~isvector(channel) ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0),\n"
+"  error('\"Analog input channel(s)\" must be a scalar or vector of positive o"
+"r zero integers.')\n"
+"end\n"
+"if ~isreal(scale) || ~isvector(scale),\n"
+"  error('\"Scale\" must be a real scalar or vector.')\n"
+"end\n"
+"if ~isreal(offset) || ~isvector(offset),\n"
+"  error('\"Offset\" must be a real scalar or vector.')\n"
+"end\n"
+"if ~isreal(minOutput) || ~isvector(minOutput),\n"
+"  error('\"Minimum output voltage\" must be a real scalar or vector.')\n"
+"end\n"
+"if ~isreal(maxOutput) || ~isvector(maxOutput),\n"
+"  error('\"Maximum output voltage\" must be a real scalar or vector.')\n"
+"end\n"
+"\n"
+"if numel(scale) == 1,\n"
+"  scale = repmat(scale, size(channel));\n"
+"elseif numel(scale) ~= numel(channel),\n"
+"  error('\"Scale\" must be scalar or a vector of the same length as the numbe"
+"r of channels.');\n"
+"end\n"
+"\n"
+"if numel(offset) == 1,\n"
+"  offset = repmat(offset, size(channel));\n"
+"elseif numel(offset) ~= numel(channel),\n"
+"  error('\"Offset\" must be scalar or a vector of the same length as the numb"
+"er of channels.');\n"
+"end\n"
+"\n"
+"if numel(minOutput) == 1,\n"
+"  minOutput = repmat(minOutput, size(channel));\n"
+"elseif numel(minOutput) ~= numel(channel),\n"
+"  error('\"Minimum output voltage\" must be scalar or a vector of the same le"
+"ngth as the number of channels.');\n"
+"end\n"
+"minOutput(isnan(minOutput)) = -inf;\n"
+" \n"
+"if numel(maxOutput) == 1,\n"
+"  maxOutput = repmat(maxOutput, size(channel));\n"
+"elseif numel(maxOutput) ~= numel(channel),\n"
+"  error('\"Maximum output voltage\" must be scalar or a vector of the same le"
+"ngth as the number of channels.');\n"
+"end\n"
+"maxOutput(isnan(maxOutput)) = inf;\n"
+"\n"
+"if any(minOutput > maxOutput),\n"
+"  error('\"Minimum output voltage\" must be less than or equal to \"Maximum o"
+"utput voltage\".');\n"
+"end\n"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "mode"
+        Prompt        "Analog input configuration"
+        Type          FixedText
+        PossibleValues {"Default", "RSE", "NRSE", "Differential", "Pseudodiffe"
+"rential"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       "Mode"
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "Analog input channel(s)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "scale"
+        Prompt        "Scale(s)"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "offset"
+        Prompt        "Offset(s)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "minOutput"
+        Prompt        "Minimum input voltage(s)"
+        Type          FreeText
+        Value         ""
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "maxOutput"
+        Prompt        "Maximum input voltage(s)"
+        Type          FreeText
+        Value         ""
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+      Schematic {
+        Location      [49, 288; 1701, 653]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetInput
+          Name          "1"
+          Show          on
+          Position      [120, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Output
+          Name          "Out1"
+          Show          off
+          Position      [375, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "dataType"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Component {
+          Type          Gain
+          Name          "Scale"
+          Show          on
+          Position      [245, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "K"
+            Value         "scale"
+            Show          off
+          }
+          Parameter {
+            Variable      "Multiplication"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+        }
+        Component {
+          Type          Offset
+          Name          "Offset"
+          Show          on
+          Position      [300, 75]
+          Direction     right
+          Flipped       off
+          Frame         [-20, -10; 20, 10]
+          LabelPosition [0, 13]
+          LabelAlign    up
+          Parameter {
+            Variable      "Offset"
+            Value         "offset"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+        }
+        Component {
+          Type          Saturation
+          Name          "Saturation"
+          Show          on
+          Position      [180, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "UpperLimit"
+            Value         "maxOutput"
+            Show          off
+          }
+          Parameter {
+            Variable      "LowerLimit"
+            Value         "minOutput"
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Scale"
+          SrcTerminal   2
+          DstComponent  "Offset"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Offset"
+          SrcTerminal   2
+          DstComponent  "Out1"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "1"
+          SrcTerminal   1
+          DstComponent  "Saturation"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Saturation"
+          SrcTerminal   2
+          DstComponent  "Scale"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Analog Out"
+      Show          on
+      Position      [185, 145]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "2"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local dim  = #Block.InputSignal[1]\n"
+"local channel = Block.Mask.channel\n"
+"local dataType = Block.Mask.dataType\n"
+"local scale = Block.Mask.scale\n"
+"local offset = Block.Mask.offset\n"
+"local min = Block.Mask.minOutput\n"
+"local max = Block.Mask.maxOutput\n"
+"local slot = Block.Mask.slotNum\n"
+"\n"
+"if dim ~= #channel then\n"
+"\treturn 'The input signal dimensions must be equal to the \"Analog output ch"
+"annel(s)\" dimensions'\n"
+"end\n"
+"\n"
+"--Associate Analog Output with Outport\n"
+"local params = {dim = dim, name = name, dataType = dataType, channel=channel,"
+" scale = scale, offset = offset, min = min, max = max, slot = slot }\n"
+"local err = Target.Coder.RegisterAnalogOutput(params)\n"
+"\n"
+"if dim == 1 then\n"
+"  OutputCode:append(\"rtOutport.%s = %s;\" % {name, Block.InputSignal[1][1]})"
+" \n"
+"else\n"
+"\tfor i = 1, dim do\n"
+"  \t\tOutputCode:append(\"rtOutport.%s[%i] = %s;\" % {name,i-1, Block.InputSi"
+"gnal[1][i]})\n"
+"\tend\n"
+"end\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tfor i = 1, dim do\n"
+"\t\t\tRequire:add((\"Slot%i-AnalogOutput\" % {slot}),channel[i])\n"
+"\tend\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputCode = OutputCode,\n"
+"  Require = Require\n"
+"}"
+      MaskType      "DAQ Analog Out"
+      MaskDescription "Set an analog output.\n"
+"\n"
+"The output voltage is calculated as input*scale+offset.   The minimum and max"
+"imum limits apply to the scaled output voltage."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_analog_out"
+"_ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nAnalog\\nOut')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType=10; % Target default floating point\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if ~isreal(channel) || ~isvector(channel) ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0),\n"
+"  error('\"Analog output channel(s)\" must be a scalar or vector of positive "
+"or zero integers.')\n"
+"end\n"
+"if ~isreal(scale) || ~isvector(scale),\n"
+"  error('\"Scale\" must be a real scalar or vector.')\n"
+"end\n"
+"if ~isreal(offset) || ~isvector(offset),\n"
+"  error('\"Offset\" must be a real scalar or vector.')\n"
+"end\n"
+"if ~isreal(minOutput) || ~isvector(minOutput),\n"
+"  error('\"Minimum output voltage\" must be a real scalar or vector.')\n"
+"end\n"
+"if ~isreal(maxOutput) || ~isvector(maxOutput),\n"
+"  error('\"Maximum output voltage\" must be a real scalar or vector.')\n"
+"end\n"
+"\n"
+"if numel(scale) == 1,\n"
+"  scale = repmat(scale, size(channel));\n"
+"elseif numel(scale) ~= numel(channel),\n"
+"  error('\"Scale\" must be scalar or a vector of the same length as the numbe"
+"r of channels.');\n"
+"end\n"
+"\n"
+"if numel(offset) == 1,\n"
+"  offset = repmat(offset, size(channel));\n"
+"elseif numel(offset) ~= numel(channel),\n"
+"  error('\"Offset\" must be scalar or a vector of the same length as the numb"
+"er of channels.');\n"
+"end\n"
+"\n"
+"if numel(minOutput) == 1,\n"
+"  minOutput = repmat(minOutput, size(channel));\n"
+"elseif numel(minOutput) ~= numel(channel),\n"
+"  error('\"Minimum output voltage\" must be scalar or a vector of the same le"
+"ngth as the number of channels.');\n"
+"end\n"
+"minOutput(isnan(minOutput)) = -inf;\n"
+" \n"
+"if numel(maxOutput) == 1,\n"
+"  maxOutput = repmat(maxOutput, size(channel));\n"
+"elseif numel(maxOutput) ~= numel(channel),\n"
+"  error('\"Maximum output voltage\" must be scalar or a vector of the same le"
+"ngth as the number of channels.');\n"
+"end\n"
+"maxOutput(isnan(maxOutput)) = inf;\n"
+"\n"
+"if any(minOutput > maxOutput),\n"
+"  error('\"Minimum output voltage\" must be less than or equal to \"Maximum o"
+"utput voltage\".');\n"
+"end\n"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot number"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "Analog output channel(s)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "scale"
+        Prompt        "Scale(s)"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "offset"
+        Prompt        "Offset(s)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "minOutput"
+        Prompt        "Minimum output voltage(s)"
+        Type          FreeText
+        Value         ""
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "maxOutput"
+        Prompt        "Maximum output voltage(s)"
+        Type          FreeText
+        Value         ""
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+      Schematic {
+        Location      [514, 457; 1823, 897]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetOutput
+          Name          "1"
+          Show          on
+          Position      [455, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Input
+          Name          "In1"
+          Show          off
+          Position      [115, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "InitialOutput"
+            Value         "[]"
+            Show          off
+          }
+          Parameter {
+            Variable      "HasDirectFeedthrough"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Component {
+          Type          Gain
+          Name          "Scale"
+          Show          on
+          Position      [195, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "K"
+            Value         "scale"
+            Show          off
+          }
+          Parameter {
+            Variable      "Multiplication"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+        }
+        Component {
+          Type          Offset
+          Name          "Offset"
+          Show          on
+          Position      [260, 75]
+          Direction     right
+          Flipped       off
+          Frame         [-20, -10; 20, 10]
+          LabelPosition [0, 13]
+          LabelAlign    up
+          Parameter {
+            Variable      "Offset"
+            Value         "offset"
+            Show          off
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "11"
+            Show          off
+          }
+        }
+        Component {
+          Type          Saturation
+          Name          "Saturation"
+          Show          on
+          Position      [330, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "UpperLimit"
+            Value         "maxOutput"
+            Show          off
+          }
+          Parameter {
+            Variable      "LowerLimit"
+            Value         "minOutput"
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Scale"
+          SrcTerminal   2
+          DstComponent  "Offset"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Offset"
+          SrcTerminal   2
+          DstComponent  "Saturation"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Saturation"
+          SrcTerminal   2
+          DstComponent  "1"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "In1"
+          SrcTerminal   1
+          DstComponent  "Scale"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Digital In"
+      Show          on
+      Position      [265, 75]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "3"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local dim  = Block.NumOutputSignals[1]\n"
+"local channel = Block.Mask.channel\n"
+"local dataType = Block.Mask.dataType\n"
+"local port = math.floor(Block.Mask.port)\n"
+"local slot = math.floor(Block.Mask.slotNum)\n"
+"\n"
+"--Associate Digital Input with Inport\n"
+"local params = {dim = dim, name = name, dataType=dataType, channel = channel,"
+" port = port, slot = slot }\n"
+"local err = Target.Coder.RegisterDigitalInput(params)\n"
+"\n"
+"if dim==1 then \n"
+"\tOutputSignal:append(\"rtInport.%s\" % {name})\n"
+"else \n"
+"\tfor i = 1, dim do\n"
+"   \tOutputSignal:append(\"rtInport.%s[%i]\" % {name,i-1})  \n"
+"   end\n"
+"end\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tfor i = 1, dim do\n"
+"\t\t\tRequire:add((\"Slot%i-DigitalIO-Port%i\" % {slot,port-1}),channel[i])\n"
+"\tend\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputSignal = { OutputSignal },\n"
+"  Require = Require\n"
+"}\n"
+      MaskType      "DAQ Digital In"
+      MaskDescription "Read a digital input."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_digital_in"
+"_ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nDigital\\nIn')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType = 10;\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if ~isreal(channel) || ~isvector(channel) ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0) || any(channel>7),\n"
+"  error('\"Digital in channel(s)\" must be a scalar or vector of positive int"
+"egers between 0 and 7.')\n"
+"end"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "port"
+        Prompt        "Port"
+        Type          FixedText
+        PossibleValues {"Port 0", "Port 1", "Port 2"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "Digital in channel(s)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+      Schematic {
+        Location      [103, 483; 1660, 798]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetInput
+          Name          "1"
+          Show          on
+          Position      [120, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Output
+          Name          "Out1"
+          Show          off
+          Position      [280, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "dataType"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "1"
+          SrcTerminal   1
+          DstComponent  "Out1"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Digital Out"
+      Show          on
+      Position      [265, 145]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "3"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local dim  = #Block.InputSignal[1]\n"
+"local dataType = Block.Mask.dataType\n"
+"local channel = Block.Mask.channel\n"
+"local port = math.floor(Block.Mask.port)\n"
+"local slot = math.floor(Block.Mask.slotNum)\n"
+"\n"
+"--Associate Analog Output with Outport\n"
+"local params = {dim = dim, name = name, dataType = dataType, channel = channe"
+"l, port = port, slot = slot }\n"
+"local err = Target.Coder.RegisterDigitalOutput(params)\n"
+"\n"
+"if dim == 1 then\n"
+"  OutputCode:append(\"rtOutport.%s = (double)%s;\" % {name, Block.InputSignal"
+"[1][1]})\n"
+"else\n"
+"\tfor i = 1, dim do\n"
+"  \t\tOutputCode:append(\"rtOutport.%s[%i] = (double)%s;\" % {name,i-1, Block"
+".InputSignal[1][i]})\n"
+"\tend\n"
+"end\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tfor i = 1, dim do\n"
+"\t\t\tRequire:add((\"Slot%i-DigitalIO-Port%i\" % {slot,port-1}),channel[i])\n"
+"\tend\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputCode = OutputCode,\n"
+"  Require = Require\n"
+"}"
+      MaskType      "DAQ Digital Out"
+      MaskDescription "Set a digital output."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_digital_ou"
+"t_ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nDigital\\nOut')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType = 10;\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if ~isreal(channel) || ~isvector(channel) ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0) || any(channel>7),\n"
+"  error('\"Digital out channel(s)\" must be a scalar or vector of positive in"
+"tegers between 0 and 7.')\n"
+"end"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "port"
+        Prompt        "Port"
+        Type          FixedText
+        PossibleValues {"Port 0", "Port 1", "Port 2"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "Digital out channel(s)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+      Schematic {
+        Location      [28, 57; 1920, 243]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetOutput
+          Name          "1"
+          Show          on
+          Position      [330, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Input
+          Name          "In1"
+          Show          off
+          Position      [115, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "InitialOutput"
+            Value         "[]"
+            Show          off
+          }
+          Parameter {
+            Variable      "HasDirectFeedthrough"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "In1"
+          SrcTerminal   1
+          DstComponent  "1"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Counter Out"
+      Show          on
+      Position      [350, 145]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "4"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local ctr = math.floor(Block.Mask.ctr-1)\n"
+"local chSelect = math.floor(Block.Mask.chSelect)\n"
+"local channel = math.floor(Block.Mask.channel)\n"
+"local dim = 2 --duty cycle and frequency\n"
+"local fc\t  = Block.Mask.fc\n"
+"local fvar = Block.Mask.fvar\n"
+"local ph   = Block.Mask.shft_pu\n"
+"local polarity\t  = Block.Mask.polarity\n"
+"local slot = math.floor(Block.Mask.slotNum)\n"
+"local counterType='output'\n"
+"local dataType = Block.Mask.dataType\n"
+"\n"
+"local params = { name = name, dim=dim, dataType = dataType, ctr = ctr, counte"
+"rType=counterType, chSelect=chSelect, channel = channel, slot = slot, fc = fc"
+", ph=ph, polarity = polarity }\n"
+"local err = Target.Coder.RegisterCounterOutput(params)\n"
+"\n"
+"--Associate Counter with Outport\n"
+"OutputCode:append(\"rtOutport.%s[0] = (double)%s;\" % {name, Block.InputSigna"
+"l[1][1]}) --duty cycle\n"
+"if fvar == '2' then\n"
+"  OutputCode:append(\"rtOutport.%s[1] = (double)%s;\" % {name, Block.InputSig"
+"nal[2][1]}) --variable frequency\n"
+"else\n"
+"  OutputCode:append(\"rtOutport.%s[1] = (double)%s;\" % {name, fc})\n"
+"end\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tRequire:add((\"Slot%i-CounterTimers\" % {slot}),ctr)\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputCode = OutputCode,\n"
+"  Require = Require\n"
+"}"
+      MaskType      "DAQ Counter Out"
+      MaskDescription "Generate a configurable pulse train using a counter out"
+"put. The counter is output is used to generate pulse width modulated (PWM) si"
+"gnals."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_counter_ou"
+"t_ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nCounter\\nOut')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType = 10;\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if (chSelect==2) && (~isreal(channel) || ~isvector(channel) || numel(channel)"
+" ~= 1  ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0))\n"
+"  error('\"PFI channel\" must be a single integer value of zero or greater.')"
+";\n"
+"end\n"
+"\n"
+"if numel(fc) ~= 1 || ~isreal(fc)\n"
+"\terror('\"Carrier frequency\" must be a scalar');\n"
+"end\n"
+"%Based on 32 bit counter with 100 MHz clock\n"
+"if fc<=0.05\n"
+"\terror('\"Carrier frequency\" must greater than 0.05 Hz. Please use \"DAQ Di"
+"gital Out\" for low frequency signals.');\n"
+"end\n"
+"if fc>25e6\n"
+"\terror('\"Carrier frequency\" must be less than 25 MHz.');\n"
+"end\n"
+"\n"
+"if numel(shft_pu) ~= 1 || ~isreal(shft_pu)\n"
+"\terror('\"Carrier phase shift\" must be a scalar');\n"
+"end\n"
+"%Based on 32 bit counter with 100 MHz clock\n"
+"if (shft_pu<0 || shft_pu>1)\n"
+"\terror('\"Carrier phase shift\" must be between 0 and 1.');\n"
+"end\n"
+"\n"
+"if polarity==1\n"
+"\toutput_values=[0 1];\n"
+"else\n"
+"\toutput_values=[1 0];\n"
+"end"
+      MaskDialogCallback "Dialog:set(\"channel\", \"Enable\", Dialog:get(\"chS"
+"elect\") == \"2\")\n"
+"\n"
+"Dialog:set('fvar', 'Visible', false)\n"
+"\n"
+"if Dialog:get('fvar')=='2' then\n"
+"\tBlock:showTerminal('f\\'', true)\n"
+"else\n"
+"\tBlock:showTerminal('f\\'', false)\n"
+"end\n"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "ctr"
+        Prompt        "Counter"
+        Type          FixedText
+        PossibleValues {"Counter 0", "Counter 1", "Counter 2", "Counter 3"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "chSelect"
+        Prompt        "PFI channel selection"
+        Type          FixedText
+        PossibleValues {"Default", "Specify PFI"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "PFI channel"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       "PFI channel"
+      }
+      Parameter {
+        Variable      "fc"
+        Prompt        "Carrier frequency (Hz)"
+        Type          FreeText
+        Value         "1000"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "shft_pu"
+        Prompt        "Carrier phase shift (p.u.)"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "fvar"
+        Prompt        "Frequency variation"
+        Type          FixedText
+        PossibleValues {"Disabled", "Enabled"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "polarity"
+        Prompt        "Polarity"
+        Type          FixedText
+        PossibleValues {"Active state logic is '1'", "Active state logic is '0"
+"'"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 10]
+        Direction     left
+      }
+      Schematic {
+        Location      [329, 381; 1483, 847]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetOutput
+          Name          "1"
+          Show          on
+          Position      [330, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Input
+          Name          "m"
+          Show          off
+          Position      [115, 75]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "InitialOutput"
+            Value         "[]"
+            Show          off
+          }
+          Parameter {
+            Variable      "HasDirectFeedthrough"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Component {
+          Type          Input
+          Name          "f'"
+          Show          off
+          Position      [115, 120]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "2"
+            Show          on
+          }
+          Parameter {
+            Variable      "InitialOutput"
+            Value         "0"
+            Show          off
+          }
+          Parameter {
+            Variable      "HasDirectFeedthrough"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Component {
+          Type          Reference
+          SrcComponent  "Components/Control/Modulators/Sawtooth PWM"
+          Name          "Sawtooth PWM"
+          Show          on
+          Position      [225, 75]
+          Direction     up
+          Flipped       off
+          Frame         [-20, -20; 20, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          Parameter {
+            Variable      "config"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "ramp"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "fc"
+            Value         "fc"
+            Show          off
+          }
+          Parameter {
+            Variable      "offset"
+            Value         "shft_pu"
+            Show          off
+          }
+          Parameter {
+            Variable      "input_limits"
+            Value         "[0 1]"
+            Show          off
+          }
+          Parameter {
+            Variable      "output_values"
+            Value         "output_values"
+            Show          off
+          }
+          Terminal {
+            Type          Output
+            Position      [24, 0]
+            Direction     right
+          }
+          Terminal {
+            Type          Input
+            Position      [-20, 0]
+            Direction     left
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "m"
+          SrcTerminal   1
+          DstComponent  "Sawtooth PWM"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Sawtooth PWM"
+          SrcTerminal   1
+          DstComponent  "1"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Position"
+      Show          on
+      Position      [350, 75]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "4 5 6"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local ctr = math.floor(Block.Mask.ctr-1)\n"
+"local dim = 1\n"
+"local chSelect = math.floor(Block.Mask.chSelect)\n"
+"local channel = Block.Mask.channel\n"
+"local dataType = Block.Mask.dataType\n"
+"local slot = math.floor(Block.Mask.slotNum)\n"
+"local indexMode = Block.Mask.indexMode\n"
+"local decoding = Block.Mask.decoding\n"
+"local reset = Block.Mask.reset\n"
+"local counterType='position'\n"
+"\n"
+"local params = {dim = dim, name = name, channel = channel, chSelect=chSelect,"
+" dataType=dataType, ctr = ctr, slot = slot, indexMode=indexMode, decoding=dec"
+"oding, counterType=counterType, reset=reset}\n"
+"local err = Target.Coder.RegisterCounterInput(params)\n"
+"\n"
+"--Associate Counter Input with Inport\n"
+"OutputSignal:append(\"rtInport.%s\" % {name})\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tRequire:add((\"Slot%i-CounterTimers\" % {slot}),ctr)\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputSignal = { OutputSignal },\n"
+"  Require = Require\n"
+"}\n"
+      MaskType      "DAQ Counter Position"
+      MaskDescription "Counts edges generated from a quadrature encoder."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_counter_po"
+"sition_ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nCounter\\nPosition')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType = 10;\n"
+"maxCount = 2^32-1;\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if (chSelect==2) && (~isreal(channel) || ~isvector(channel) || numel(channel)"
+" ~= 3  ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0))\n"
+"  error('\"PFI channels\" must be a vector of three positive or zero integers"
+".')\n"
+"end"
+      MaskDialogCallback "Dialog:set(\"channel\", \"Enable\", Dialog:get(\"chS"
+"elect\") == \"2\")\n"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "ctr"
+        Prompt        "Counter"
+        Type          FixedText
+        PossibleValues {"Counter 0", "Counter 1", "Counter 2", "Counter 3"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "chSelect"
+        Prompt        "PFI channel selection"
+        Type          FixedText
+        PossibleValues {"Default", "Specify PFI"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "PFI channels [A,B,Z]"
+        Type          FreeText
+        Value         ""
+        Show          off
+        Tunable       off
+        TabName       "PFI channels"
+      }
+      Parameter {
+        Variable      "indexMode"
+        Prompt        "Index mode"
+        Type          FixedText
+        PossibleValues {"A High B High", "A High B Low", "A Low B High", "A Lo"
+"w B Low"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "decoding"
+        Prompt        "Decoding"
+        Type          FixedText
+        PossibleValues {"Count leading edge of A", "Count both edges of A", "C"
+"ount both edges of A and B"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "reset"
+        Prompt        "Counter reset method"
+        Type          FixedText
+        PossibleValues {"Free running", "Index pulse"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+      Schematic {
+        Location      [33, 78; 1573, 540]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetInput
+          Name          "A"
+          Show          on
+          Position      [120, 95]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Output
+          Name          "Out1"
+          Show          off
+          Position      [355, 125]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "dataType"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "ones(1,1)"
+            Show          off
+          }
+        }
+        Component {
+          Type          TargetInput
+          Name          "B"
+          Show          on
+          Position      [120, 125]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          TargetInput
+          Name          "Z"
+          Show          on
+          Position      [120, 155]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Subsystem
+          Name          "eQEP"
+          Show          on
+          Position      [265, 125]
+          Direction     up
+          Flipped       off
+          Frame         [-20, -20; 20, 20]
+          LabelPosition [0, 23]
+          LabelAlign    up
+          SampleTime    "-1"
+          CodeGenDiscretizationMethod "2"
+          CodeGenTarget "Generic"
+          MaskIconFrame on
+          MaskIconOpaque off
+          MaskIconRotates on
+          MaskInit      "disk_cnt = (cntr_max+1)/4;\n"
+"if (disk_cnt ~= round(disk_cnt))\n"
+"\terror('(Maximum counter value + 1) should be integer multiple of 4!');\n"
+"end"
+          Parameter {
+            Variable      "cntr_max"
+            Prompt        "Maximum counter value"
+            Type          FreeText
+            Value         "maxCount"
+            Show          off
+            Tunable       off
+            TabName       ""
+          }
+          Parameter {
+            Variable      "decoding"
+            Prompt        "Decoding"
+            Type          FixedText
+            PossibleValues {"Count leading edge of A", "Count both edges of A", ""
+"Count both edges of A and B"}
+            Value         "decoding"
+            Show          off
+            Tunable       off
+            TabName       ""
+          }
+          Parameter {
+            Variable      "indexMode"
+            Prompt        "Index Mode"
+            Type          FixedText
+            PossibleValues {"A High B High", "A High B Low", "A Low B High", ""
+"A Low B Low"}
+            Value         "indexMode"
+            Show          off
+            Tunable       off
+            TabName       ""
+          }
+          Terminal {
+            Type          Input
+            Position      [-20, -10]
+            Direction     left
+          }
+          Terminal {
+            Type          Input
+            Position      [-20, 0]
+            Direction     left
+          }
+          Terminal {
+            Type          Input
+            Position      [-20, 10]
+            Direction     left
+          }
+          Terminal {
+            Type          Output
+            Position      [24, 0]
+            Direction     right
+          }
+          Schematic {
+            Location      [1001, 660; 1390, 891]
+            ZoomFactor    1
+            SliderPosition [0, 0]
+            ShowBrowser   off
+            BrowserWidth  100
+            Component {
+              Type          Input
+              Name          "A"
+              Show          on
+              Position      [80, 50]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "1"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          Input
+              Name          "B"
+              Show          on
+              Position      [80, 90]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "2"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          Input
+              Name          "I"
+              Show          on
+              Position      [80, 130]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "3"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Component {
+              Type          CScript
+              Name          "Counter"
+              Show          on
+              Position      [210, 60]
+              Direction     up
+              Flipped       off
+              Parameter {
+                Variable      "DialogGeometry"
+                Value         "[111 102 701 746]"
+                Show          off
+              }
+              Parameter {
+                Variable      "NumInputs"
+                Value         "3"
+                Show          off
+              }
+              Parameter {
+                Variable      "NumOutputs"
+                Value         "1"
+                Show          off
+              }
+              Parameter {
+                Variable      "NumContStates"
+                Value         "1"
+                Show          off
+              }
+              Parameter {
+                Variable      "NumDiscStates"
+                Value         "0"
+                Show          off
+              }
+              Parameter {
+                Variable      "NumZCSignals"
+                Value         "0"
+                Show          off
+              }
+              Parameter {
+                Variable      "DirectFeedthrough"
+                Value         "1"
+                Show          off
+              }
+              Parameter {
+                Variable      "Ts"
+                Value         "0"
+                Show          off
+              }
+              Parameter {
+                Variable      "Parameters"
+                Value         "cntr_max,decoding,indexMode"
+                Show          off
+              }
+              Parameter {
+                Variable      "LangStandard"
+                Value         "2"
+                Show          off
+              }
+              Parameter {
+                Variable      "GnuExtensions"
+                Value         "2"
+                Show          off
+              }
+              Parameter {
+                Variable      "RuntimeCheck"
+                Value         "2"
+                Show          off
+              }
+              Parameter {
+                Variable      "Declarations"
+                Value         "static int edge_prev; //1 for A, 2 for B \n"
+"static int edge_type_prev; //-1 for down, 1 for up\n"
+"static int edge_actual; //1 for A, 2 for B \n"
+"static int edge_type_actual; //-1 for down, 1 for up\n"
+"\n"
+"static int value_A_prev;\n"
+"static int value_A_actual;\n"
+"static int value_B_prev;\n"
+"static int value_B_actual;\n"
+"static int value_I_prev;\n"
+"static int value_I_actual;\n"
+"static int direction_actual; //-1 for minus, 1 for plus\n"
+"static int cntr_max;\n"
+"static int edge_detected;\n"
+"static int cntr;\n"
+"static int decoding; //1=x1,2=x2,3=x4\n"
+"static int indexMode; //\n"
+"\n"
+"\n"
+"static int decodeX1(int dir, int edge, int type, int count)\n"
+"{  \n"
+"\t\tif(dir == 1 && edge==1 && type==1)\n"
+"\t\t{\n"
+"\t\t\tcount = count + 1;\n"
+"\t\t}\n"
+"\t\telse if (dir == -1 && edge==1 && type==-1)\n"
+"\t\t{\n"
+"\t\t\tcount = count - 1;\n"
+"\t\t}\n"
+"\t\treturn count;\n"
+"}\n"
+"\n"
+"static int decodeX2(int dir, int edge, int type, int count)\n"
+"{  \n"
+"\t\tif(dir == 1 && edge==1 )\n"
+"\t\t{\n"
+"\t\t\tcount = count + 1;\n"
+"\t\t}\n"
+"\t\telse if (dir == -1 && edge==1 )\n"
+"\t\t{\n"
+"\t\t\tcount = count - 1;\n"
+"\t\t}\t\t\n"
+"\t\treturn count;\n"
+"}\n"
+"\n"
+"static int decodeX4(int dir, int edge, int type, int count)\n"
+"{  \n"
+"\t\tif(dir == 1 )\n"
+"\t\t{\n"
+"\t\t\tcount = count + 1;\n"
+"\t\t}\n"
+"\t\telse if (dir == -1 )\n"
+"\t\t{\n"
+"\t\t\tcount = count - 1;\n"
+"\t\t}\t\t\n"
+"\t\treturn count;\n"
+"}\n"
+"\n"
+"\n"
+                Show          off
+              }
+              Parameter {
+                Variable      "StartFcn"
+                Value         "edge_prev = 1;\n"
+"edge_type_prev = 1; \n"
+"edge_actual = 1; \n"
+"edge_type_actual = 1; \n"
+"value_A_prev = 0;\n"
+"value_A_actual = 0;\n"
+"value_B_prev = 0;\n"
+"value_B_actual = 0;\n"
+"direction_actual = 1;\n"
+"cntr_max = ParamRealData(0, 0);\n"
+"edge_detected = 0;\n"
+"cntr = 0;\n"
+"decoding = ParamRealData(1, 0);\n"
+"indexMode = ParamRealData(2, 0);\n"
+                Show          off
+              }
+              Parameter {
+                Variable      "OutputFcn"
+                Value         "if(IsMajorStep)\n"
+"{\n"
+"\tvalue_A_actual = Input(0);\n"
+"\tvalue_B_actual = Input(1);\n"
+"\tvalue_I_actual = Input(2);\n"
+"\t\n"
+"\t// Determine the edge source and type\n"
+"\tif ((value_A_prev==0)&&(value_A_actual==1))\n"
+"\t{\n"
+"\t\tedge_actual = 1; //1 for A, 2 for B \n"
+"\t\tedge_type_actual = 1; //-1 for down, 1 for up\n"
+"\t\tedge_detected = 1;\n"
+"\t}\n"
+"\telse if ((value_A_prev==1)&&(value_A_actual==0))\n"
+"\t{\n"
+"\t\tedge_actual = 1; //1 for A, 2 for B \n"
+"\t\tedge_type_actual = -1; //-1 for down, 1 for up\n"
+"\t\tedge_detected = 1;\n"
+"\t}\n"
+"\telse if ((value_B_prev==0)&&(value_B_actual==1))\n"
+"\t{\n"
+"\t\tedge_actual = 2; //1 for A, 2 for B \n"
+"\t\tedge_type_actual = 1; //-1 for down, 1 for up\n"
+"\t\tedge_detected = 1;\n"
+"\t}\n"
+"\telse if ((value_B_prev==1)&&(value_B_actual==0))\n"
+"\t{\n"
+"\t\tedge_actual = 2; //1 for A, 2 for B \n"
+"\t\tedge_type_actual = -1; //-1 for down, 1 for up\n"
+"\t\tedge_detected = 1;\n"
+"\t}\n"
+"\telse\n"
+"\t{\n"
+"\t\tedge_detected = 0;\n"
+"\t}\t\n"
+"\t\n"
+"\tif(edge_detected)\n"
+"\t{\n"
+"\t\t// Determine the direction\n"
+"\t\tif(edge_prev == 1)\t\n"
+"\t\t{\n"
+"\t\t\tif(edge_type_prev == 1)\n"
+"\t\t\t{\n"
+"\t\t\t\tif(edge_actual==2)\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = 1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t\telse\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t\telse\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==-1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -direction_actual;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t}\n"
+"\t\t\telse\n"
+"\t\t\t{\n"
+"\t\t\t\tif(edge_actual==2)\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==-1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = 1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t\telse\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t\telse\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tdirection_actual = -direction_actual;\n"
+"\t\t\t\t}\n"
+"\t\t\t}\n"
+"\t\t}\n"
+"\t\telse\n"
+"\t\t{\n"
+"\t\t\tif(edge_type_prev==1)\n"
+"\t\t\t{\n"
+"\t\t\t\tif(edge_actual==1)\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t\telse\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = 1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t\telse\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==-1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -direction_actual;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t}\n"
+"\t\t\telse\n"
+"\t\t\t{\n"
+"\t\t\t\tif(edge_actual==1)\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==-1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t\telse\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = 1;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t\telse\n"
+"\t\t\t\t{\n"
+"\t\t\t\t\tif(edge_type_actual==1)\n"
+"\t\t\t\t\t{\n"
+"\t\t\t\t\t\tdirection_actual = -direction_actual;\n"
+"\t\t\t\t\t}\n"
+"\t\t\t\t}\n"
+"\t\t\t}\n"
+"\t\t}\t\n"
+"\t\t\n"
+"\t\t// Update the counter\n"
+"\t\tif(decoding == 1)\n"
+"\t\t{\n"
+"\t\t\tcntr = decodeX1(direction_actual, edge_actual, edge_type_actual, cntr);"
+"\n"
+"\t\t}\n"
+"\t\telse if (decoding == 2)\n"
+"\t\t{\n"
+"\t\t\tcntr = decodeX2(direction_actual, edge_actual, edge_type_actual, cntr);"
+"\n"
+"\t\t}\n"
+"\t\telse if (decoding == 3)\n"
+"\t\t{\n"
+"\t\t\tcntr = decodeX4(direction_actual, edge_actual, edge_type_actual, cntr);"
+"\n"
+"\t\t}\t\t\n"
+"\t}\n"
+"\t\n"
+"\t// Reset the counter with index pulse\n"
+"\tif(value_I_prev==0 && value_I_actual==1 )\n"
+"\t{\n"
+"\t\tif((indexMode==1 && (value_A_actual==1 && value_B_actual==1)) ||\n"
+"\t\t\t(indexMode==2 && (value_A_actual==1 && value_B_actual==0)) ||\n"
+"\t\t\t(indexMode==3 && (value_A_actual==0 && value_B_actual==1)) ||\n"
+"\t\t\t(indexMode==4 && (value_A_actual==0 && value_B_actual==0)))\n"
+"\t\t{\n"
+"\t\t\tcntr = 0;\n"
+"\t\t}\n"
+"\t}\t\t\t\t\n"
+"\n"
+"\t\n"
+"\tOutput(0) = cntr;\t\t\t\n"
+"\t\n"
+"\tvalue_A_prev = value_A_actual;\n"
+"\tvalue_B_prev = value_B_actual;\n"
+"\tvalue_I_prev = value_I_actual;\n"
+"\tedge_prev = edge_actual;\n"
+"\tedge_type_prev = edge_type_actual;\n"
+"}\n"
+"\n"
+                Show          off
+              }
+              Parameter {
+                Variable      "UpdateFcn"
+                Value         ""
+                Show          off
+              }
+              Parameter {
+                Variable      "DerivativeFcn"
+                Value         ""
+                Show          off
+              }
+              Parameter {
+                Variable      "TerminateFcn"
+                Value         ""
+                Show          off
+              }
+              Parameter {
+                Variable      "StoreCustomStateFcn"
+                Value         ""
+                Show          off
+              }
+              Parameter {
+                Variable      "RestoreCustomStateFcn"
+                Value         ""
+                Show          off
+              }
+            }
+            Component {
+              Type          SignalMux
+              Name          "Mux"
+              Show          off
+              Position      [155, 60]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Width"
+                Value         "3"
+                Show          off
+              }
+            }
+            Component {
+              Type          Output
+              Name          "cnt"
+              Show          on
+              Position      [325, 60]
+              Direction     right
+              Flipped       off
+              Parameter {
+                Variable      "Index"
+                Value         "4"
+                Show          on
+              }
+              Parameter {
+                Variable      "Width"
+                Value         "-1"
+                Show          off
+              }
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "A"
+              SrcTerminal   1
+              DstComponent  "Mux"
+              DstTerminal   2
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "B"
+              SrcTerminal   1
+              Points        [120, 90; 120, 60]
+              DstComponent  "Mux"
+              DstTerminal   3
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "I"
+              SrcTerminal   1
+              Points        [130, 130; 130, 70]
+              DstComponent  "Mux"
+              DstTerminal   4
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Mux"
+              SrcTerminal   1
+              DstComponent  "Counter"
+              DstTerminal   1
+            }
+            Connection {
+              Type          Signal
+              SrcComponent  "Counter"
+              SrcTerminal   2
+              DstComponent  "cnt"
+              DstTerminal   1
+            }
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "A"
+          SrcTerminal   1
+          Points        [185, 95; 185, 115]
+          DstComponent  "eQEP"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "B"
+          SrcTerminal   1
+          DstComponent  "eQEP"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Z"
+          SrcTerminal   1
+          Points        [185, 155; 185, 135]
+          DstComponent  "eQEP"
+          DstTerminal   3
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "eQEP"
+          SrcTerminal   4
+          DstComponent  "Out1"
+          DstTerminal   1
+        }
+      }
+    }
+    Component {
+      Type          TargetCode
+      Name          "Edge"
+      Show          on
+      Position      [430, 75]
+      Direction     up
+      Flipped       off
+      Frame         [-25, -20; 25, 20]
+      LabelPosition [0, 23]
+      LabelAlign    up
+      TargetPortIndices "7 8"
+      SampleTime    "0"
+      EnforceBaseTask "1"
+      CodeFcnLang   "2"
+      CodeFcn       "if (Target.Family ~= \"NIVeriStand\") then\n"
+"  return 'This block is not compatible with the selected target family (\"%s"
+"\")' % {Target.Family}\n"
+"end\n"
+"\n"
+"local Require = ResourceList:new()\n"
+"local InitCode = StringList:new()\n"
+"local OutputSignal = StringList:new()\n"
+"\n"
+"local Utils = require('CoderUtils')\n"
+"\n"
+"local name = Utils.MakeValidCName(Block.Name)\n"
+"local ctr = math.floor(Block.Mask.ctr-1)\n"
+"local dim = 1\n"
+"local chSelect = math.floor(Block.Mask.chSelect)\n"
+"local channel = Block.Mask.channel\n"
+"local dataType = Block.Mask.dataType\n"
+"local slot = math.floor(Block.Mask.slotNum)\n"
+"local edge = Block.Mask.edge\n"
+"local direction = Block.Mask.direction\n"
+"local dirChannel = Block.Mask.dirChannel\n"
+"local init = math.floor(Block.Mask.init)\n"
+"local counterType='edge'\n"
+"\n"
+"local params = {dim = dim, name = name, channel = channel, chSelect=chSelect,"
+" dataType=dataType, ctr = ctr, slot = slot, counterType=counterType, edge=edg"
+"e, direction=direction,  dirChannel=dirChannel, init=init}\n"
+"local err = Target.Coder.RegisterCounterInput(params)\n"
+"\n"
+"--Associate Counter Input with Inport\n"
+"OutputSignal:append(\"rtInport.%s\" % {name})\n"
+"\n"
+"if Target.Variables.buildType~=3 and Target.Variables.buildType~=6 then\n"
+"\tRequire:add((\"Slot%i-CounterTimers\" % {slot}),ctr)\n"
+"end\n"
+"\n"
+"return {\n"
+"  InitCode = InitCode,\n"
+"  OutputSignal = { OutputSignal },\n"
+"  Require = Require\n"
+"}\n"
+      MaskType      "DAQ Counter Edge"
+      MaskDescription "Output the number of rising or falling edges on a count"
+"er input."
+      MaskHelp      "qthelp://com.plexim.niveristandtsp.1.0/doc/daq_counter_ed"
+"ge_ni.html"
+      MaskDisplay   "Icon:text('DAQ\\nCounter\\nEdge')\n"
+"\n"
+"local function drawNIlogoSimple(x,y)\n"
+"  Icon:color(42,185,129)\n"
+"  Icon:patch({x-11,x-3,x-3,x-10},{y+17,y+17,y+10,y+10})\n"
+"  Icon:patch({x-15.25,x-11,x-10,x-14},{y+17,y+17,y+14,y+14})\n"
+"  Icon:patch({x-14.5,x-11,x-10,x-12.5},{y+15,y+15,y+12,y+12})\n"
+"  Icon:patch({x-12.5,x-11,x-10,x-11},{y+12,y+12,y+10,y+11})\n"
+"  Icon:text(x-8.5, y+13.5, '<b>ni<b>', 'FontSize', 8, 'TextFormat', 'RichText"
+"', 'Color', {255,255,255})\n"
+"  Icon:color(0,0,0)\n"
+"  Icon:arc(x-6,y+19,10,10,180,-90)\n"
+"end\n"
+"\n"
+"drawNIlogoSimple(-9,-29)"
+      MaskDisplayLang "2"
+      MaskIconFrame on
+      MaskIconOpaque off
+      MaskIconRotates on
+      MaskInit      "dataType = 10;\n"
+"\n"
+"if ~isreal(slotNum) || numel(slotNum)~=1 || floor(slotNum)~=slotNum || slotNu"
+"m < 1\n"
+"   error('\"Slot Number\" must be an integer value greater than 1.');\n"
+"end\n"
+"\n"
+"if (chSelect==2) && (~isreal(channel) || ~isvector(channel) || numel(channel)"
+" ~= 1  ...\n"
+"   || any(floor(channel) ~= channel) || any(channel < 0))\n"
+"  error('\"PFI channel\" must be a single integer value of zero or greater.')"
+";\n"
+"end\n"
+"if (chSelect==2) && (~isreal(dirChannel) || ~isvector(dirChannel) || numel(di"
+"rChannel) ~= 1  ...\n"
+"   || any(floor(dirChannel) ~= dirChannel) || any(dirChannel < 0))\n"
+"  error('\"Count direction PFI channel\" must be a single integer value of ze"
+"ro or greater.');\n"
+"end\n"
+"\n"
+"if ~isreal(init) || numel(init)~=1 || floor(init)~=init\n"
+"   error('\"Initial count\" must be a single integer value.');\n"
+"end"
+      MaskDialogCallback "Dialog:set(\"channel\", \"Enable\", Dialog:get(\"chS"
+"elect\") == \"2\")\n"
+"Dialog:set('dirChannel','Enable',Dialog:get(\"chSelect\") == \"2\" and Dialog"
+":get('direction')==\"3\")\n"
+"\n"
+"local parent = Block:get(\"Parent\")\n"
+"local blockName = Block:get(\"Name\")\n"
+"local showParentTerms = Dialog:get(\"direction\") == '3'\n"
+"parent:showTerminal(\"%s / Dir \" % { blockName }, showParentTerms)\n"
+      Parameter {
+        Variable      "slotNum"
+        Prompt        "Slot"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "ctr"
+        Prompt        "Counter"
+        Type          FixedText
+        PossibleValues {"Counter 0", "Counter 1", "Counter 2", "Counter 3"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "chSelect"
+        Prompt        "PFI channel selection"
+        Type          FixedText
+        PossibleValues {"Default", "Specify PFI"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "channel"
+        Prompt        "PFI channel"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       "PFI channels"
+      }
+      Parameter {
+        Variable      "edge"
+        Prompt        "Count edge"
+        Type          FixedText
+        PossibleValues {"Rising", "Falling"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "direction"
+        Prompt        "Count direction"
+        Type          FixedText
+        PossibleValues {"Count up", "Count down", "External control"}
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Parameter {
+        Variable      "dirChannel"
+        Prompt        "Count direction PFI channel"
+        Type          FreeText
+        Value         "1"
+        Show          off
+        Tunable       off
+        TabName       "PFI channels"
+      }
+      Parameter {
+        Variable      "init"
+        Prompt        "Initial count"
+        Type          FreeText
+        Value         "0"
+        Show          off
+        Tunable       off
+        TabName       ""
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+      Schematic {
+        Location      [329, 276; 1686, 666]
+        ZoomFactor    1
+        SliderPosition [0, 0]
+        ShowBrowser   off
+        BrowserWidth  100
+        Component {
+          Type          TargetInput
+          Name          "Edge"
+          Show          on
+          Position      [125, 120]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          Output
+          Name          "Out1"
+          Show          off
+          Position      [435, 125]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Index"
+            Value         "1"
+            Show          on
+          }
+          Parameter {
+            Variable      "DataType"
+            Value         "dataType"
+            Show          off
+          }
+          Parameter {
+            Variable      "Width"
+            Value         "numel(channel)"
+            Show          off
+          }
+        }
+        Component {
+          Type          TargetInput
+          Name          "Dir"
+          Show          on
+          Position      [125, 185]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "-1"
+            Show          off
+          }
+        }
+        Component {
+          Type          EdgeDetection
+          Name          "Edge Detection"
+          Show          off
+          Position      [205, 120]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Direction"
+            Value         "edge"
+            Show          off
+          }
+        }
+        Component {
+          Type          SignalMux
+          Name          "Mux"
+          Show          off
+          Position      [260, 125]
+          Direction     right
+          Flipped       off
+          Parameter {
+            Variable      "Width"
+            Value         "2"
+            Show          off
+          }
+        }
+        Component {
+          Type          ConfigurableSubsystem
+          Name          "Direction\nSelector"
+          Show          on
+          Position      [205, 185]
+          Direction     up
+          Flipped       off
+          Frame         [-25, -15; 25, 15]
+          LabelPosition [0, 18]
+          LabelAlign    up
+          SampleTime    "-1"
+          CodeGenDiscretizationMethod "2"
+          CodeGenTarget "Generic"
+          MaskDisplayLang "2"
+          MaskIconFrame on
+          MaskIconOpaque off
+          MaskIconRotates on
+          Terminal {
+            Type          Input
+            Position      [-25, 0]
+            Direction     left
+          }
+          Terminal {
+            Type          Output
+            Position      [29, 0]
+            Direction     right
+          }
+          TerminalNames { "In1", "Out1" }
+          Location      [468, 133; 909, 331]
+          ZoomFactor    1
+          SliderPosition [0, 0]
+          ShowBrowser   off
+          BrowserWidth  100
+          Configurations {
+            Name          "Count Up"
+            Schematic {
+              Component {
+                Type          Input
+                Name          "In1"
+                Show          off
+                Position      [140, 80]
+                Direction     right
+                Flipped       off
+                Parameter {
+                  Variable      "Index"
+                  Value         "1"
+                  Show          on
+                }
+                Parameter {
+                  Variable      "Width"
+                  Value         "-1"
+                  Show          off
+                }
+              }
+              Component {
+                Type          Output
+                Name          "Out1"
+                Show          off
+                Position      [300, 80]
+                Direction     right
+                Flipped       off
+                Parameter {
+                  Variable      "Index"
+                  Value         "2"
+                  Show          on
+                }
+                Parameter {
+                  Variable      "Width"
+                  Value         "-1"
+                  Show          off
+                }
+              }
+              Component {
+                Type          Constant
+                Name          "Constant"
+                Show          off
+                Position      [240, 80]
+                Direction     right
+                Flipped       off
+                Frame         [-10, -10; 10, 10]
+                LabelPosition [0, 13]
+                LabelAlign    up
+                Parameter {
+                  Variable      "Value"
+                  Value         "1"
+                  Show          off
+                }
+                Parameter {
+                  Variable      "DataType"
+                  Value         "10"
+                  Show          off
+                }
+              }
+              Connection {
+                Type          Signal
+                SrcComponent  "Constant"
+                SrcTerminal   1
+                DstComponent  "Out1"
+                DstTerminal   1
+              }
+            }
+            Name          "Count Down"
+            Schematic {
+              Component {
+                Type          Input
+                Name          "In1"
+                Show          off
+                Position      [140, 80]
+                Direction     right
+                Flipped       off
+                Parameter {
+                  Variable      "Index"
+                  Value         "1"
+                  Show          on
+                }
+                Parameter {
+                  Variable      "Width"
+                  Value         "-1"
+                  Show          off
+                }
+              }
+              Component {
+                Type          Output
+                Name          "Out1"
+                Show          off
+                Position      [300, 80]
+                Direction     right
+                Flipped       off
+                Parameter {
+                  Variable      "Index"
+                  Value         "2"
+                  Show          on
+                }
+                Parameter {
+                  Variable      "Width"
+                  Value         "-1"
+                  Show          off
+                }
+              }
+              Component {
+                Type          Constant
+                Name          "Constant"
+                Show          off
+                Position      [245, 80]
+                Direction     right
+                Flipped       off
+                Frame         [-10, -10; 10, 10]
+                LabelPosition [0, 13]
+                LabelAlign    up
+                Parameter {
+                  Variable      "Value"
+                  Value         "0"
+                  Show          off
+                }
+                Parameter {
+                  Variable      "DataType"
+                  Value         "10"
+                  Show          off
+                }
+              }
+              Connection {
+                Type          Signal
+                SrcComponent  "Constant"
+                SrcTerminal   1
+                DstComponent  "Out1"
+                DstTerminal   1
+              }
+            }
+            Name          "External Control"
+            Schematic {
+              Component {
+                Type          Input
+                Name          "In1"
+                Show          off
+                Position      [140, 80]
+                Direction     right
+                Flipped       off
+                Parameter {
+                  Variable      "Index"
+                  Value         "1"
+                  Show          on
+                }
+                Parameter {
+                  Variable      "Width"
+                  Value         "-1"
+                  Show          off
+                }
+              }
+              Component {
+                Type          Output
+                Name          "Out1"
+                Show          off
+                Position      [300, 80]
+                Direction     right
+                Flipped       off
+                Parameter {
+                  Variable      "Index"
+                  Value         "2"
+                  Show          on
+                }
+                Parameter {
+                  Variable      "Width"
+                  Value         "-1"
+                  Show          off
+                }
+              }
+              Connection {
+                Type          Signal
+                SrcComponent  "In1"
+                SrcTerminal   1
+                DstComponent  "Out1"
+                DstTerminal   1
+              }
+            }
+          }
+          Parameter {
+            Variable      "Configuration"
+            Value         "direction"
+            Show          off
+          }
+        }
+        Component {
+          Type          CScript
+          Name          "Counter"
+          Show          on
+          Position      [330, 125]
+          Direction     up
+          Flipped       off
+          Parameter {
+            Variable      "DialogGeometry"
+            Value         "[583 249 818 674]"
+            Show          off
+          }
+          Parameter {
+            Variable      "NumInputs"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "NumOutputs"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "NumContStates"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "NumDiscStates"
+            Value         "0"
+            Show          off
+          }
+          Parameter {
+            Variable      "NumZCSignals"
+            Value         "0"
+            Show          off
+          }
+          Parameter {
+            Variable      "DirectFeedthrough"
+            Value         "1"
+            Show          off
+          }
+          Parameter {
+            Variable      "Ts"
+            Value         "0"
+            Show          off
+          }
+          Parameter {
+            Variable      "Parameters"
+            Value         "init"
+            Show          off
+          }
+          Parameter {
+            Variable      "LangStandard"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "GnuExtensions"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "RuntimeCheck"
+            Value         "2"
+            Show          off
+          }
+          Parameter {
+            Variable      "Declarations"
+            Value         "#include <float.h>\n"
+"#define EDGE\t\tInput(0)\n"
+"#define DIRECTION\tInput(1)\n"
+"#define CTR_INIT  ParamRealData(0, 0);\n"
+"static long int cntr;\n"
+            Show          off
+          }
+          Parameter {
+            Variable      "StartFcn"
+            Value         "cntr = CTR_INIT;"
+            Show          off
+          }
+          Parameter {
+            Variable      "OutputFcn"
+            Value         "if(IsMajorStep)\n"
+"{\n"
+"\n"
+"\tif(DIRECTION==0) //down\n"
+"\t{\n"
+"\t\tcntr=cntr-EDGE;\n"
+"\t}\n"
+"\telse //up\n"
+"\t{\n"
+"\t\tcntr=cntr+EDGE;\n"
+"\t}\n"
+"\n"
+"\tOutput(0) = cntr;\t\t\n"
+"}\n"
+"\n"
+            Show          off
+          }
+          Parameter {
+            Variable      "UpdateFcn"
+            Value         ""
+            Show          off
+          }
+          Parameter {
+            Variable      "DerivativeFcn"
+            Value         ""
+            Show          off
+          }
+          Parameter {
+            Variable      "TerminateFcn"
+            Value         ""
+            Show          off
+          }
+          Parameter {
+            Variable      "StoreCustomStateFcn"
+            Value         ""
+            Show          off
+          }
+          Parameter {
+            Variable      "RestoreCustomStateFcn"
+            Value         ""
+            Show          off
+          }
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Counter"
+          SrcTerminal   2
+          DstComponent  "Out1"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Mux"
+          SrcTerminal   1
+          DstComponent  "Counter"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Dir"
+          SrcTerminal   1
+          DstComponent  "Direction\nSelector"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Direction\nSelector"
+          SrcTerminal   2
+          Points        [245, 185]
+          DstComponent  "Mux"
+          DstTerminal   3
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Edge Detection"
+          SrcTerminal   2
+          DstComponent  "Mux"
+          DstTerminal   2
+        }
+        Connection {
+          Type          Signal
+          SrcComponent  "Edge"
+          SrcTerminal   1
+          DstComponent  "Edge Detection"
+          DstTerminal   1
+        }
+      }
+    }
+  }
+}
+DemoSignature "GhMsGUhpYUCivqufJg5U8/nbzywq9+gWKWxgvgGOi84="

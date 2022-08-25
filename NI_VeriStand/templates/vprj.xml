@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<NIVSPortConfig>
+    <Version Major="|>VS_VERSION_MAJOR<|" Minor="|>VS_VERSION_MINOR<|" Fix="0" Build="0"/>
+	<!--The project must refer to a *.nivsproj file, not an *.nivsprj-->
+    <Project>|>BUILD_ROOT<|\|>BASE_NAME<|.nivsproj</Project>
+    <ShowWorkspace>false</ShowWorkspace>
+    <ShowVeriStandScreen>true</ShowVeriStandScreen>
+    <MAPortConfig>
+      <TaskList>
+        <!--<Task>Task100</Task>-->
+      </TaskList>
+      <LogPostProcessPeriodMS>500</LogPostProcessPeriodMS>
+    </MAPortConfig>
+</NIVSPortConfig> 

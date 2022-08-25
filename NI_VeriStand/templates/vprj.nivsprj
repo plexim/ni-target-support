@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SourceFile Checksum="9186275F05C4A511BE11BED0B0AF0C10ABF1A12268C189CB952D1BFBD389378B0DAC769DC512257259901E594106B35AE153C146718D5CF62273E8B91DA8D28B" xmlns="http://www.ni.com/PlatformFramework">
+	<SourceModelFeatureSet>
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="Editor" Name="http://www.ni.com/PlatformFramework" OldestCompatibleVersion="7.1.0.49153" Version="7.1.0.49153" />
+		<ParsableNamespace AssemblyFileVersion="7.1.0.50148" FeatureSetName="VeriStand Core Components" Name="http://www.ni.com/VeriStand" OldestCompatibleVersion="7.0.0.49152" Version="7.0.0.49152" />
+		<ApplicationVersionInfo Build="7.1.0.50148" Name="VeriStand" Version="7.1.0.50148" />
+	</SourceModelFeatureSet>
+	<Project xmlns="http://www.ni.com/PlatformFramework">
+		<EnvoyManagerRootEnvoy Id="1" ModelDefinitionType="EnvoyManagerRootEnvoy" Name="RootEnvoy" />
+		<EmbeddedDefinitionReference Id="2" ModelDefinitionType="NationalInstruments.ProjectExplorer.Modeling.ProjectDataManager" Name="ProjectExplorer">
+			<ProjectExplorer />
+		</EmbeddedDefinitionReference>
+		<NameScopingEnvoy Id="4" ModelDefinitionType="DefaultTarget" Name="DefaultTarget">
+			<DefaultTarget />
+			<EmbeddedDefinitionReference Id="5" ModelDefinitionType="GatewayDefinition" Name="Gateway" Reparentable="False">
+				<GatewayDefinition xmlns="http://www.ni.com/VeriStand" />
+			</EmbeddedDefinitionReference>
+			<FileReference Bindings=".nivscf" Id="5f0ca002d58f485aa3967de547b6fd76" ModelDefinitionType="{http://www.ni.com/PlatformFramework}ExternalFile" Name="|>CALIBRATION_FILE<|" StoragePath="|>CALIBRATION_FILE<|" />
+			<SourceFileReference Id="33ba548c73b3401c8906b26f71ca6a41" ModelDefinitionType="{http://www.ni.com/VeriStand}Screen" Name="|>EDITOR_SCREEN_FILE<|" StoragePath="|>EDITOR_SCREEN_FILE<|" />
+			<FileReference Bindings=".nivsscreen" Id="dab4748b1ecc4b19b290018bc2d97a46" ModelDefinitionType="{http://www.ni.com/PlatformFramework}ExternalFile" Name="|>WORKSPACE_SCREEN_FILE<|" StoragePath="|>WORKSPACE_SCREEN_FILE<|" />
+			<FileReference Bindings=".nivsproj" Id="853e5bb43ab34d338a21000166965ccd" ModelDefinitionType="{http://www.ni.com/PlatformFramework}ExternalFile" Name="|>BASE_NAME<|.nivsproj" StoragePath="|>BASE_NAME<|.nivsproj" />
+			<SourceFileReference Bindings="EnvoyManager" Id="aa5af7c249134566ab10d9c6ee474451" ModelDefinitionType="{http://www.ni.com/VeriStand}SystemDefinition" Name="|>BASE_NAME<|.nivssdf" StoragePath="|>BASE_NAME<|.nivssdf" />
+			<EmbeddedDefinitionReference Id="b93ddd3a0f174ff4b1dad81d83940cf9" ModelDefinitionType="SdfFilePath" Name="SdfPath" Reparentable="False">
+				<SdfFilePath SdfPath="|>BASE_NAME<|.nivssdf" xmlns="http://www.ni.com/VeriStand" />
+			</EmbeddedDefinitionReference>
+		</NameScopingEnvoy>
+	</Project>
+	<ProjectInformation xmlns="http://www.ni.com/PlatformFramework" />
+</SourceFile>

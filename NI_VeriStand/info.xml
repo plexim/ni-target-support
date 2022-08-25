@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TargetSupportPackage xmlns="http://www.plexim.com/xml/codegentarget/" version="1.0">
+  <TargetFamily>NIVeriStand</TargetFamily>
+  <BlockLibrary file="NI_Lib">NI VeriStand Target</BlockLibrary>
+  <MinPlecsVersion>4.5.4</MinPlecsVersion>
+  <ExternalTools>
+    <DirSelect prompt="Toolchain directory" variable="niOecoreToolchainDir" tab="General" optional="false" />  
+    <DirSelect prompt="VeriStand x86 install directory (optional)" variable="VeriStandx86InstallDir" tab="General" optional="true" />  
+    <DirSelect prompt="VeriStand x64 install directory (optional)" variable="VeriStandx64InstallDir" tab="General" optional="true" />  
+    <DirSelect prompt="DAQmx ANSI C support directory (optional)" variable="DAQmxLibDir" tab="General" optional="true" default="C:/Program Files (x86)/National Instruments/Shared/ExternalCompilerSupport/C" />  
+  </ExternalTools>
+  <ExternalMode>
+    <Type>TCP</Type>
+	<OnConnectFunction><![CDATA[
+		return require "OnConnectFunction"
+	]]></OnConnectFunction>
+  </ExternalMode>
+  <Parameters>
+     
+  </Parameters>  
+  <CodeFunction lang="Lua"><![CDATA[return require "Coder"]]></CodeFunction>
+  <BuildSteps>
+    <CopyFile>
+      <Source>$(TARGET_ROOT)/templates/gensrcs.mk</Source>
+      <Destination>$(BASE_NAME)_sources.mk</Destination>
+      <Replace>
+        <Before><![CDATA[|>SOURCE_FILES<|]]></Before>
+        <After>$(SOURCE_FILES)</After>
+      </Replace>
+    </CopyFile>
+    <Make description="Compile sources">
+      <Timeout>120</Timeout>
+      <Makefile>$(BASE_NAME).mk</Makefile>
+    </Make>
+    <Make description="Creating VeriStand System Definition">
+      <Condition variable="buildType" relop="==" value="1" />
+      <Timeout>120</Timeout>
+      <Makefile>$(BASE_NAME).mk</Makefile>
+      <Argument>sysdef</Argument>
+    </Make>
+    <Make description="Deploying to target">
+      <Condition variable="deployFlag" relop="~=" value="0" />
+      <Timeout>120</Timeout>
+      <Makefile>$(BASE_NAME).mk</Makefile>
+      <Argument>download</Argument>
+    </Make>
+  </BuildSteps>
+  
+  <Target help="nihelp.qch">
+    <Name>VeriStand</Name>
+    <Version>1.1.1</Version>
+    <Parameters>
+       <ComboBox prompt="Build type" variable="buildType" default="3">
+        <Item>VeriStand engine</Item>
+        <Item>Custom engine</Item>
+        <Item>Model only</Item>
+      </ComboBox>
+      <ComboBox prompt="VeriStand version" variable="VeriStandVersion" default="3" eval="false" tab="General">
+        <Item>2019</Item>
+        <Item>2019 R2</Item>
+        <Item>2019 R3</Item>
+        <Item>2020</Item>
+        <Item>2020 R2</Item>
+        <Item>2020 R3</Item>
+        <Item>2020 R4</Item>
+        <Item>2020 R5</Item>
+        <Item>2020 R6</Item>
+        <Item>2021</Item>
+      </ComboBox>
+      <CheckBox prompt="Deploy to target after build" variable="deployFlag" default="1" eval="false"  tab="General"  />
+      <ExtModeSelect tab="General" />
+      <CheckBox prompt="Use key based authentification" variable="targKeyAuth" default="0" eval="false"  tab="General"  />
+      <FileSelect prompt="Hardware configuration file from NI Max" variable="nimaxFile" filters="NI Configuration Export file (*.nce)" tab="General" />
+      <LineEdit prompt="Target IP address" variable="targIP"  default="0.0.0.0" eval="false" tab="General" />    
+      <LineEdit prompt="Target username" variable="targUserName"  default="admin" eval="false" tab="General" />    
+      <LineEdit prompt="Target password" variable="targPassword"  default="" eval="false" tab="General" />    
+      <LineEdit prompt="Analog input voltage range [min,max]" variable="aiMinMaxVal"  default="[-10,10]" eval="false" tab="General" />    
+      <LineEdit prompt="Analog output voltage range [min,max]" variable="aoMinMaxVal"  default="[-10,10]" eval="false" tab="General" />    
+      <!-- VeriStand Project Files -->
+      <FileSelect prompt="Workspace screen file" variable="vsWorkspaceScreen" filters="VeriStand workspace screen file (*.nivsscreen)" tab="VeriStand project files" />
+      <FileSelect prompt="Editor screen file" variable="vsEditorScreen" filters="VeriStand editor screen file (*.nivsscr)" tab="VeriStand project files" />
+      <FileSelect prompt="Calibration file" variable="vsCalibration" filters="VeriStand Calibration File (*.nivscf)" tab="VeriStand project files" />
+      <!--Skip build and generate code for debugging purposes. Builder disables this option.-->
+      <CheckBox prompt="Generate code only" variable="codegenFlag" default="0" eval="false"  tab="General"  />
+      <DirSelect prompt="Eclipse CG directory" variable="installDir" default="" eval="false" tab="General" />
+      <!--Create invisible model parameter for checksum.  Not visible in callbacks by default.-->
+      <LineEdit prompt="Default checksum length" variable="checksumLength"  default="5" eval="false" tab="General" />    
+      <LineEdit prompt="Default checksum datatype" variable="checksumDataType"  default="6" eval="false" tab="General" />
+  </Parameters>
+  <DialogCallback><![CDATA[
+        --Managing visibility
+        Dialog:set('VeriStandVersion',  'Visible', (Dialog:get('buildType') == '1') )
+        Dialog:set('vsWorkspaceScreen', 'Enable', (Dialog:get('buildType') == '1') )
+        Dialog:set('vsEditorScreen',    'Enable', (Dialog:get('buildType') == '1') )
+        Dialog:set('vsCalibration',     'Enable', (Dialog:get('buildType') == '1') )
+        Dialog:set('deployFlag',    'Enable',  (Dialog:get('buildType') ~= '3') and (Dialog:get('codegenFlag') ~= '1') )
+        Dialog:set('nimaxFile',     'Visible', (Dialog:get('buildType') ~= '3') )
+        Dialog:set('targIP',        'Visible', (Dialog:get('buildType') ~= '3') )
+        Dialog:set('targUserName',  'Visible', (Dialog:get('buildType') ~= '3') )
+        Dialog:set('targKeyAuth',   'Visible', (Dialog:get('buildType') == '2') )
+        Dialog:set('targPassword',  'Visible', (Dialog:get('buildType') ~= '3') )
+        Dialog:set('targPassword',  'Enable', (Dialog:get('targKeyAuth') == '0') )
+        Dialog:set('aiMinMaxVal',   'Visible', (Dialog:get('buildType') ~= '3') )
+        Dialog:set('aoMinMaxVal',   'Visible', (Dialog:get('buildType') ~= '3') )
+        Dialog:set('codegenFlag',   'Visible', false )
+        Dialog:set('installDir',    'Visible', (Dialog:get('codegenFlag') == '1') )
+        Dialog:set('checksumLength','Visible', false)
+        Dialog:set('checksumDataType','Visible', false )
+    ]]>
+    </DialogCallback>
+  </Target>
+</TargetSupportPackage>
+
